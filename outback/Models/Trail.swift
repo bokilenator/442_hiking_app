@@ -19,4 +19,5 @@ struct Trail {
   let latitude: Float
   let condition: String
   let condition_details: String
+  let park: Park
 }
