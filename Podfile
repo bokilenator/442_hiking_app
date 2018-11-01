@@ -6,6 +6,7 @@ target 'outback' do
   use_frameworks!
 
   # Pods for outback
+  pod 'SwiftyJSON'
   pod 'Mapbox-iOS-SDK', '~> 4.4'
   pod 'MapboxNavigation', '~> 0.22.0'
   target 'outbackTests' do
