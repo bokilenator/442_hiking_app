@@ -174,6 +174,7 @@
                         <outlet property="distanceLabel" destination="vs8-Vj-BqS" id="UNp-yM-6Hc"/>
                         <outlet property="nationalParkLabel" destination="VU1-BU-jgT" id="qc9-dO-0N7"/>
                         <outlet property="stateLabel" destination="9hg-wN-cdZ" id="5zN-d3-Gap"/>
+                        <outlet property="trailNameLabel" destination="5LK-QQ-gaM" id="sKB-Qc-pjJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYG-QX-I72" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -11,10 +11,40 @@ import UIKit
 class SingleTrailDetailViewController: UIViewController {
 
   
+  @IBOutlet weak var trailNameLabel: UILabel!
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var stateLabel: UILabel!
   @IBOutlet weak var nationalParkLabel: UILabel!
   @IBOutlet weak var datesLabel: UILabel!
+  
+  var detailItem: Trail? {
+    didSet {
+      // Update the view.
+      self.configureView()
+    }
+  }
+  
+  func configureView() {
+    // Update the user interface for the detail item.
+    if let detail: Trail = self.detailItem {
+      if let name = self.trailNameLabel {
+        name.text = detail.name
+      }
+      if let length = self.distanceLabel {
+        length.integer = detail.length
+      }
+      if let state = self.stateLabel {
+        state.text = detail.state
+      }
+      if let nationalPark = self.nationalParkLabel {
+        nationalPark.text = detail.nationalPark
+      }
+      if let dates = self.datesLabel {
+        dates.text = detail.dates
+      }
+    }
+  }
+  
   
   @IBAction func saveTrail(_ sender: Any) {
   }
