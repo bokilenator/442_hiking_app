@@ -45,7 +45,7 @@ class TrailsViewModel {
         let latitude = swiftyjson["trails"][i]["latitude"].float!
         let condition = swiftyjson["trails"][i]["conditionStatus"].string ?? ""
         let condition_details: String = swiftyjson["trails"][i]["conditionDetails"].string ?? ""
-        let trail = Trail.init(name: name, summary: summary, difficulty: difficulty, rating: rating, url: url, img: img, length: length, longitude: longitude, latitude: latitude, condition: condition, condition_details: condition_details)
+        let trail = Trail.init(name: name, summary: summary, difficulty: difficulty, rating: rating, url: url, img: img, length: length, longitude: longitude, latitude: latitude, condition: condition, condition_details: condition_details, park: nil)
         trails.append(trail)
       }
     } catch let error as NSError {
