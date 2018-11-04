@@ -127,6 +127,8 @@
 		9E645007218789A200302455 /* outback */ = {
 			isa = PBXGroup;
 			children = (
+				9EF6E25F218B99BD00482BE9 /* Parks */,
+				9EF6E25E218B999400482BE9 /* Maps */,
 				9EF6E254218B428D00482BE9 /* Models */,
 				9EF6E24A218B3CE300482BE9 /* Trails */,
 				9E645008218789A200302455 /* AppDelegate.swift */,
@@ -135,7 +137,7 @@
 				9E645014218789A400302455 /* LaunchScreen.storyboard */,
 				9E645017218789A400302455 /* Info.plist */,
 				9E64500F218789A200302455 /* outback.xcdatamodeld */,
-				9EF6E251218B3ED300482BE9 /* Trail Detail */,
+				9EF6E251218B3ED300482BE9 /* Trail Details */,
 			);
 			path = outback;
 			sourceTree = "<group>";
@@ -160,13 +162,13 @@
 			path = Trails;
 			sourceTree = "<group>";
 		};
-		9EF6E251218B3ED300482BE9 /* Trail Detail */ = {
+		9EF6E251218B3ED300482BE9 /* Trail Details */ = {
 			isa = PBXGroup;
 			children = (
 				9EF6E24F218B3ECB00482BE9 /* TrailDetailViewController.swift */,
 				9EF6E258218B49B200482BE9 /* TrailDetailViewModel.swift */,
 			);
-			path = "Trail Detail";
+			path = "Trail Details";
 			sourceTree = "<group>";
 		};
 		9EF6E254218B428D00482BE9 /* Models */ = {
@@ -177,6 +179,20 @@
 				9EF6E25C218B95EE00482BE9 /* Plan.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		9EF6E25E218B999400482BE9 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
+		9EF6E25F218B99BD00482BE9 /* Parks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Parks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
