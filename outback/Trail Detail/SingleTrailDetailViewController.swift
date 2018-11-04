@@ -16,6 +16,8 @@ class SingleTrailDetailViewController: UIViewController {
   @IBOutlet weak var stateLabel: UILabel!
   @IBOutlet weak var nationalParkLabel: UILabel!
   @IBOutlet weak var datesLabel: UILabel!
+  @IBOutlet weak var availabilityLabel: UILabel!
+  
   
   var detailItem: Trail? {
     didSet {
@@ -30,17 +32,20 @@ class SingleTrailDetailViewController: UIViewController {
       if let name = self.trailNameLabel {
         name.text = detail.name
       }
-      if let length = self.distanceLabel {
-        length.integer = detail.length
+      if let length = self.distanceLabel{
+        length.text = String(detail.length)
       }
-      if let state = self.stateLabel {
-        state.text = detail.state
-      }
-      if let nationalPark = self.nationalParkLabel {
-        nationalPark.text = detail.nationalPark
-      }
-      if let dates = self.datesLabel {
-        dates.text = detail.dates
+//      if let state = self.stateLabel {
+//        state.text = detail.state
+//      }
+//      if let nationalPark = self.nationalParkLabel {
+//        nationalPark.text = detail.nationalPark
+//      }
+//      if let dates = self.datesLabel {
+//        dates.text = detail.dates
+//      }
+      if let condition = self.availabilityLabel {
+        condition.text = detail.condition
       }
     }
   }

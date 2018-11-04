@@ -165,11 +165,26 @@
                                     <action selector="downloadMap:" destination="Bzv-it-VdB" eventType="touchUpInside" id="xOP-bc-JtW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Availability:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qtc-Wq-vDq">
+                                <rect key="frame" x="13" y="435" width="99" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Availability here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhO-C6-t1S">
+                                <rect key="frame" x="216" y="437" width="107" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Hgp-B2-DdA"/>
                     </view>
                     <connections>
+                        <outlet property="availabilityLabel" destination="rhO-C6-t1S" id="kyg-qr-Ufc"/>
                         <outlet property="datesLabel" destination="9DS-GM-NXq" id="XKf-sD-9u5"/>
                         <outlet property="distanceLabel" destination="vs8-Vj-BqS" id="UNp-yM-6Hc"/>
                         <outlet property="nationalParkLabel" destination="VU1-BU-jgT" id="qc9-dO-0N7"/>
