@@ -30,7 +30,12 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
   // MARK: - viewDidLoad, WillAppear
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.title = "Yosemite National Park"
+    
+    if (viewModel.park == nil) {
+      self.title = "National Park"
+    } else {
+      self.title = viewModel.park?.full_name
+    }
 
     // register the nib
     let cellNib = UINib(nibName: "TableViewCell", bundle: nil)

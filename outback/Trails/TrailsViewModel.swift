@@ -29,12 +29,19 @@ class TrailsViewModel {
 //        self.repos = repositories
 //      }
     let api_key = "200375104-0392bc18905efe70f4e0062b073c01fe"
-    let search_lat = "37.84883288"
-    let search_long = "-119.5571873"
+    var search_lat = "37.84883288"
+    var search_long = "-119.5571873"
+    
+    if (self.park != nil) {
+      search_lat = park?.latitude as! String
+      search_long = park?.longitude as! String
+    }
+    
     let search_distance = "200"
     let search_rating = "0"
     let search_sort = "quality"
     let npsURL: NSURL = NSURL(string: "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)")!
+    let debugURL = "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)"
     let data = NSData(contentsOf: npsURL as URL)!
     do {
       let swiftyjson = try JSON(data: data as Data)

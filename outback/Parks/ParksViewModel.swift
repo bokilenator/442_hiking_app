@@ -53,7 +53,7 @@ class ParksViewModel {
         let description = swiftyjson["data"][i]["description"].string ?? ""
 
         
-        if (full_name != "" || parseCoords != ["0", "0"]) {
+        if (full_name != "" && parseCoords != ["0", "0"]) {
           let park = Park.init(entrance_fees: entrance_fees, operating_hours: operating_hours, full_name: full_name, states: states, latitude: latitude, longitude: longitude, url: url, weatherInfo: weatherInfo, image: image, description: description)
           parks.append(park)
         }
