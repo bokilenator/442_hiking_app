@@ -10,6 +10,13 @@ import Foundation
 import SwiftyJSON
 
 class TrailsViewModel {
+  
+  var park:Park? = nil
+  
+  init(park: Park?) {
+    self.park = park
+  }
+  
   var trails = [Trail]()
 //  var filteredRepos = [Repository]()
   
@@ -33,7 +40,6 @@ class TrailsViewModel {
       let swiftyjson = try JSON(data: data as Data)
       let total = swiftyjson["trails"].count
       for i in 0..<total {
-        print("\n------------------------------------------------\n")
         let name = swiftyjson["trails"][i]["name"].string ?? ""
         let summary = swiftyjson["trails"][i]["summary"].string ?? ""
         let difficulty = swiftyjson["trails"][i]["difficulty"].string ?? ""

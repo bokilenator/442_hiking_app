@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F94EADB44AEA1B59A14AFD5 /* Pods_outbackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B89BB587D08987A0587652 /* Pods_outbackTests.framework */; };
+		9E28570B219094C700F6D109 /* ParksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28570A219094C700F6D109 /* ParksViewController.swift */; };
+		9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28570C219094FC00F6D109 /* ParksViewModel.swift */; };
 		9E645009218789A200302455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E645008218789A200302455 /* AppDelegate.swift */; };
 		9E64500E218789A200302455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E64500C218789A200302455 /* Main.storyboard */; };
 		9E645011218789A200302455 /* outback.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E64500F218789A200302455 /* outback.xcdatamodeld */; };
@@ -41,6 +43,8 @@
 		623731199901A639388E8A40 /* Pods_outback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_outback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A5292AAF198E59A2568D28 /* Pods-outbackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outbackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-outbackTests/Pods-outbackTests.release.xcconfig"; sourceTree = "<group>"; };
 		7890E0ED3F98C47BA9D2A0EF /* Pods-outback.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outback.release.xcconfig"; path = "Pods/Target Support Files/Pods-outback/Pods-outback.release.xcconfig"; sourceTree = "<group>"; };
+		9E28570A219094C700F6D109 /* ParksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewController.swift; sourceTree = "<group>"; };
+		9E28570C219094FC00F6D109 /* ParksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewModel.swift; sourceTree = "<group>"; };
 		9E645005218789A200302455 /* outback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outback.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E645008218789A200302455 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E64500D218789A200302455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				9EF6E254218B428D00482BE9 /* Models */,
 				9EF6E24A218B3CE300482BE9 /* Trails */,
 				9E645008218789A200302455 /* AppDelegate.swift */,
+				9EF6E24B218B3E8700482BE9 /* TableViewCell.swift */,
+				9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */,
 				9E64500C218789A200302455 /* Main.storyboard */,
 				9E645012218789A400302455 /* Assets.xcassets */,
 				9E645014218789A400302455 /* LaunchScreen.storyboard */,
@@ -154,8 +160,6 @@
 		9EF6E24A218B3CE300482BE9 /* Trails */ = {
 			isa = PBXGroup;
 			children = (
-				9EF6E24B218B3E8700482BE9 /* TableViewCell.swift */,
-				9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */,
 				9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */,
 				9EF6E252218B3FE000482BE9 /* TrailsViewModel.swift */,
 			);
@@ -191,6 +195,8 @@
 		9EF6E25F218B99BD00482BE9 /* Parks */ = {
 			isa = PBXGroup;
 			children = (
+				9E28570A219094C700F6D109 /* ParksViewController.swift */,
+				9E28570C219094FC00F6D109 /* ParksViewModel.swift */,
 			);
 			path = Parks;
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E28570B219094C700F6D109 /* ParksViewController.swift in Sources */,
 				9EF6E24D218B3E8700482BE9 /* TableViewCell.swift in Sources */,
 				9EF6E253218B3FE000482BE9 /* TrailsViewModel.swift in Sources */,
 				9EF6E256218B429E00482BE9 /* Trail.swift in Sources */,
@@ -400,6 +407,7 @@
 				9EF6E25D218B95EE00482BE9 /* Plan.swift in Sources */,
 				9EF6E250218B3ECB00482BE9 /* TrailDetailViewController.swift in Sources */,
 				9E645011218789A200302455 /* outback.xcdatamodeld in Sources */,
+				9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */,
 				9E645009218789A200302455 /* AppDelegate.swift in Sources */,
 				9EF6E25B218B959700482BE9 /* Park.swift in Sources */,
 				9EF6E249218B3CDB00482BE9 /* TrailsViewController.swift in Sources */,
