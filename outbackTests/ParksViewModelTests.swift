@@ -46,4 +46,8 @@ class ParksViewModelTests: XCTestCase {
     XCTAssertEqual(viewModel.summaryForRowAtIndexPath(IndexPath(row: 0, section: 0)), "Description 1")
     XCTAssertEqual(viewModel.summaryForRowAtIndexPath(IndexPath(row: 1, section: 0)), "Description 2")
   }
+  
+  func test_detailViewModelForRowAtIndexPath() {
+    XCTAssertEqual(viewModel.detailViewModelForRowAtIndexPath(IndexPath(row: 0, section: 0)).park!.full_name, "Park 1")
+  }
 }
