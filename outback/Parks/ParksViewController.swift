@@ -1,13 +1,12 @@
 //
-//  TrailsViewController.swift
+//  ParksViewController.swift
 //  outback
 //
-//  Created by Karan Bokil on 11/1/18.
+//  Created by Karan Bokil on 11/5/18.
 //  Copyright © 2018 Karan Bokil. All rights reserved.
 //
 
 import Foundation
-import SwiftyJSON
 import UIKit
 
 // MARK: - UISearch extension
@@ -19,10 +18,10 @@ import UIKit
 
 
 // MARK: - Main View Controller
-class TrailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ParksViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   // MARK: - Properties & Outlets
-  var viewModel = TrailsViewModel(park: nil)
+  let viewModel = ParksViewModel()
   let searchController = UISearchController(searchResultsController: nil)
   
   @IBOutlet var tableView: UITableView!
@@ -30,18 +29,13 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
   // MARK: - viewDidLoad, WillAppear
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.title = "National Parks"
     
-    if (viewModel.park == nil) {
-      self.title = "National Park"
-    } else {
-      self.title = viewModel.park?.full_name
-    }
-
     // register the nib
     let cellNib = UINib(nibName: "TableViewCell", bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: "cell")
     // set up the search bar (method below)
-//    setupSearchBar()
+    //    setupSearchBar()
     // get the data for the table
     viewModel.refresh { [unowned self] in
       DispatchQueue.main.async {
@@ -70,12 +64,12 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: "toDetailVC", sender: indexPath)
+    performSegue(withIdentifier: "toTrailsVC", sender: indexPath)
   }
   
   // MARK: - Segues
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let detailVC = segue.destination as? TrailDetailsViewController,
+    if let detailVC = segue.destination as? TrailsViewController,
       let indexPath = sender as? IndexPath {
       detailVC.viewModel = viewModel.detailViewModelForRowAtIndexPath(indexPath)
     }
@@ -83,19 +77,19 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
   
   
   // MARK: - Search Methods
-//  func setupSearchBar() {
-//    searchController.searchResultsUpdater = self
-//    searchController.dimsBackgroundDuringPresentation = false
-//    definesPresentationContext = true
-//    tableView.tableHeaderView = searchController.searchBar
-//    searchController.searchBar.barTintColor = UIColor(red:0.98, green:0.48, blue:0.24, alpha:1.0)
-//  }
-//
-//  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-//    viewModel.updateFiltering(searchText)
-//    tableView.reloadData()
-//  }
-//
+  //  func setupSearchBar() {
+  //    searchController.searchResultsUpdater = self
+  //    searchController.dimsBackgroundDuringPresentation = false
+  //    definesPresentationContext = true
+  //    tableView.tableHeaderView = searchController.searchBar
+  //    searchController.searchBar.barTintColor = UIColor(red:0.98, green:0.48, blue:0.24, alpha:1.0)
+  //  }
+  //
+  //  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+  //    viewModel.updateFiltering(searchText)
+  //    tableView.reloadData()
+  //  }
+  //
 }
 
 

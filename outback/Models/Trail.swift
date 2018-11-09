@@ -20,4 +20,5 @@ struct Trail {
   let condition: String
   let condition_details: String
   let park: Park?
+  let state: String?
 }

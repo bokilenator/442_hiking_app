@@ -7,13 +7,17 @@
 //
 
 import Foundation
+import SwiftyJSON
+
 struct Park {
-  let entrance_fees: String
-  let operating_hours: String
+  let entrance_fees: JSON
+  let operating_hours: JSON
   let full_name: String
-  let states: [String]
-  let coordinates: String
+  let states: String
+  let latitude:String
+  let longitude: String
   let url: String
   let weatherInfo: String
   let image: String
+  let description: String
 }

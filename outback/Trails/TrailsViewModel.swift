@@ -10,6 +10,13 @@ import Foundation
 import SwiftyJSON
 
 class TrailsViewModel {
+  
+  var park:Park? = nil
+  
+  init(park: Park?) {
+    self.park = park
+  }
+  
   var trails = [Trail]()
 //  var filteredRepos = [Repository]()
   
@@ -22,18 +29,24 @@ class TrailsViewModel {
 //        self.repos = repositories
 //      }
     let api_key = "200375104-0392bc18905efe70f4e0062b073c01fe"
-    let search_lat = "37.84883288"
-    let search_long = "-119.5571873"
+    var search_lat = "37.84883288"
+    var search_long = "-119.5571873"
+    
+    if (self.park != nil) {
+      search_lat = park?.latitude as! String
+      search_long = park?.longitude as! String
+    }
+    
     let search_distance = "200"
     let search_rating = "0"
     let search_sort = "quality"
     let npsURL: NSURL = NSURL(string: "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)")!
+    let debugURL = "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)"
     let data = NSData(contentsOf: npsURL as URL)!
     do {
       let swiftyjson = try JSON(data: data as Data)
       let total = swiftyjson["trails"].count
       for i in 0..<total {
-        print("\n------------------------------------------------\n")
         let name = swiftyjson["trails"][i]["name"].string ?? ""
         let summary = swiftyjson["trails"][i]["summary"].string ?? ""
         let difficulty = swiftyjson["trails"][i]["difficulty"].string ?? ""
@@ -45,7 +58,7 @@ class TrailsViewModel {
         let latitude = swiftyjson["trails"][i]["latitude"].float!
         let condition = swiftyjson["trails"][i]["conditionStatus"].string ?? ""
         let condition_details: String = swiftyjson["trails"][i]["conditionDetails"].string ?? ""
-        let trail = Trail.init(name: name, summary: summary, difficulty: difficulty, rating: rating, url: url, img: img, length: length, longitude: longitude, latitude: latitude, condition: condition, condition_details: condition_details, park: nil)
+        let trail = Trail.init(name: name, summary: summary, difficulty: difficulty, rating: rating, url: url, img: img, length: length, longitude: longitude, latitude: latitude, condition: condition, condition_details: condition_details, park: park, state: "CA") //need to update to get state from search query
         trails.append(trail)
       }
     } catch let error as NSError {
@@ -75,9 +88,9 @@ class TrailsViewModel {
 
   }
   
-  func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> TrailDetailViewModel {
+  func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> TrailDetailsViewModel {
     let trail = trails[indexPath.row]
-    return TrailDetailViewModel(trail: trail)
+    return TrailDetailsViewModel(trail: trail)
   }
   
 //  func updateFiltering(_ searchText: String) -> Void {
