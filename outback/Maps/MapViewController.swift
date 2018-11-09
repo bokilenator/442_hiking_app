@@ -12,14 +12,23 @@ import Mapbox
 import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
+import SwiftyJSON
+
+extension Double {
+  /// Rounds the double to decimal places value
+  func rounded(toPlaces places:Int) -> Double {
+    let divisor = pow(10.0, Double(places))
+    return (self * divisor).rounded() / divisor
+  }
+}
 
 class MapViewController: UIViewController, MGLMapViewDelegate {
   
   var viewModel: MapViewModel?
   var mapView: NavigationMapView!
   var progressView: UIProgressView!
-  var directionsRoute: Route?
-  var navigateButton: UIButton!
+  var routePolyLine: MGLPolyline!
+  var destinationCoords: [CLLocationCoordinate2D]!
   
   var startCoordinate = CLLocationCoordinate2D(latitude: 37.734328, longitude: -119.601744)
   var endCoordinate = CLLocationCoordinate2D(latitude: 37.728628, longitude: -119.573124)
@@ -50,14 +59,18 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     //add start marker
     let annotation = MGLPointAnnotation()
     annotation.coordinate = self.startCoordinate
-    annotation.title = "Kinkaku-ji"
-    annotation.subtitle = "\(annotation.coordinate.latitude), \(annotation.coordinate.longitude)"
+    annotation.title = "Start Location"
+    annotation.subtitle = "\(viewModel?.title() as! String), \(viewModel?.trail.park?.full_name as! String)"
     mapView.addAnnotation(annotation)
     
     mapView.setCenter(startCoordinate, zoomLevel: 16, animated: false)
     
+    // Add a gesture recognizer to the map view
+    let longPress = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
+    mapView.addGestureRecognizer(longPress)
+    
     //navigate button
-    addButton()
+//    addButton()
     
     
     // Setup offline pack notification handlers.
@@ -66,66 +79,85 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
   }
   
-  func addButton() {
-    navigateButton = UIButton(frame: CGRect(x: (view.frame.width/2)-100, y: view.frame.height - 75, width: 200, height: 50))
-    navigateButton.backgroundColor = UIColor.white
-    navigateButton.setTitle("   NAVIGATE   ", for: .normal)
-    navigateButton.setTitleColor(UIColor(red: 59/255, green: 178/255, blue: 208/255, alpha: 1), for: .normal)
-    navigateButton.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
-    navigateButton.layer.cornerRadius = 25
-    navigateButton.layer.shadowOffset = CGSize(width: 0, height: 10)
-    navigateButton.layer.shadowColor = UIColor.black.cgColor
-    navigateButton.layer.shadowRadius = 5
-    navigateButton.layer.shadowOpacity = 0.3
-    navigateButton.addTarget(self, action: #selector(navigateButtonWasPressed(sender:)), for: .touchUpInside)
-    view.addSubview(navigateButton)
-  }
-  
-  @objc func navigateButtonWasPressed( sender: UIButton) {
-    mapView.setUserTrackingMode(.none, animated: true)
+  @objc func didLongPress(_ sender: UILongPressGestureRecognizer) {
+    guard sender.state == .began else { return }
     
-    calculateRoute(from: startCoordinate, to: endCoordinate, completion: { (route, error) in
+    // Converts point where user did a long press to map coordinates
+    let point = sender.location(in: mapView)
+    let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+    
+    // Create a basic point annotation and add it to the map
+    let annotation = MGLPointAnnotation()
+    annotation.coordinate = coordinate
+    annotation.title = "Waypoint: \(coordinate.latitude.rounded(toPlaces: 3)), \(coordinate.longitude.rounded(toPlaces: 3))"
+    mapView.addAnnotation(annotation)
+    
+    
+    calculateOptimizedRoute(from: startCoordinate, to: annotation.coordinate) { (route, error) in
       if error != nil {
-        print("Error getting route")
+        print("Error calculating route")
       }
-    })
-  }
-  
-  func calculateRoute(from originCoor: CLLocationCoordinate2D, to destinationCoor: CLLocationCoordinate2D, completion: @escaping (Route?, Error?) -> Void) {
-    let origin = Waypoint(coordinate: originCoor, coordinateAccuracy: -1, name: "Start")
-    let destination = Waypoint(coordinate: destinationCoor, coordinateAccuracy: -1, name: "Finish")
-    
-    let options = NavigationRouteOptions(waypoints: [origin, destination], profileIdentifier: .walking)
-    
-    _ = Directions.shared.calculate(options, completionHandler: { (waypoints, routes, error) in
-      self.directionsRoute = routes?.first
-      self.drawRoute(route: self.directionsRoute!)
-      
-      let coordinateBounds = MGLCoordinateBounds(sw: destinationCoor, ne: originCoor)
-      let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
-      let routeCam = self.mapView.cameraThatFitsCoordinateBounds(coordinateBounds, edgePadding: insets)
-      self.mapView.setCamera(routeCam, animated: true)
-    })
-  }
-  
-  func drawRoute(route: Route) {
-    guard route.coordinateCount > 0 else { return }
-    var routeCoordinates = route.coordinates!
-    let polyline = MGLPolylineFeature(coordinates: &routeCoordinates, count: route.coordinateCount)
-    
-    if let source = mapView.style?.source(withIdentifier: "route-source") as? MGLShapeSource {
-      source.shape = polyline
-    } else {
-      let source = MGLShapeSource(identifier: "route-source", features: [polyline], options: nil)
-      
-      let lineStyle = MGLLineStyleLayer(identifier: "route-style", source: source)
-      lineStyle.lineColor = NSExpression(forConstantValue: UIColor(red: 41/255, green: 145/255, blue: 171/255, alpha: 1))
-      lineStyle.lineWidth = NSExpression(forConstantValue: 5.0)
-      
-      mapView.style?.addSource(source)
-      mapView.style?.addLayer(lineStyle)
-      
     }
+  }
+  // Retrieve optimization api data
+  func calculateOptimizedRoute(from origin: CLLocationCoordinate2D,
+                               to destination: CLLocationCoordinate2D,
+                               completion: @escaping (Route?, Error?) -> ()) {
+    if (destinationCoords == nil) {
+      destinationCoords = []
+    }
+    destinationCoords.append(destination)
+    clearPolyLine()
+    //Mapbox geojson uses long, lat!
+    let accessToken = "sk.eyJ1Ijoia2Jva2lsIiwiYSI6ImNqbXhteHZmeTBjangzcWxydHRjbHc2MXAifQ.y5ybeyL8pcy0L2Z9aPTSSg"
+    let originString = "\(origin.longitude),\(origin.latitude);"
+    let destinationString = destinationCoordsToString()
+    let midPointString = "\(origin.longitude - 0.0001),\(origin.latitude)"
+    let distributionString = "1,2"
+    
+    let url:String = "https://api.mapbox.com/optimized-trips/v1/mapbox/walking/" + originString + destinationString + midPointString + "?distributions=" + distributionString + "&overview=full&steps=true&geometries=geojson&source=first&access_token=" + accessToken
+    let optURL: NSURL = NSURL(string: url)!
+    let data = NSData(contentsOf: optURL as URL)!
+    
+    do {
+      let swiftyjson = try JSON(data: data as Data)
+      let coords = swiftyjson["trips"][0]["geometry"]["coordinates"].array
+      var coordinates:[CLLocationCoordinate2D] = []
+      for coord in coords ?? [] {
+        let c = coord.arrayValue
+        coordinates.append(CLLocationCoordinate2D(latitude: c[1].doubleValue, longitude: c[0].doubleValue))
+      }
+      print(coordinates)
+      routePolyLine = MGLPolyline(coordinates: &coordinates, count: UInt(coordinates.count))
+      mapView.addAnnotation(routePolyLine)
+    } catch let error as NSError {
+      print(error)
+    }
+    
+  }
+  
+  func clearPolyLine() {
+    if (routePolyLine != nil) {
+      mapView.removeAnnotation(routePolyLine)
+    }
+  }
+  
+  func destinationCoordsToString() -> String {
+    var res = ""
+    for destination in self.destinationCoords {
+      res = res + "\(destination.longitude),\(destination.latitude);"
+    }
+    return String(res[..<res.endIndex])
+    
+  }
+  
+  // Implement the delegate method that allows annotations to show callouts when tapped
+  func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+    return true
+  }
+  
+  // Present the navigation view controller when the callout is selected
+  func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
   }
   
   
@@ -193,6 +225,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
       if completedResources == expectedResources {
         let byteCount = ByteCountFormatter.string(fromByteCount: Int64(pack.progress.countOfBytesCompleted), countStyle: ByteCountFormatter.CountStyle.memory)
         print("Offline pack “\(userInfo["name"] ?? "unknown")” completed: \(byteCount), \(completedResources) resources")
+        progressView.alpha = 0
       } else {
         // Otherwise, print download/verification progress.
         print("Offline pack “\(userInfo["name"] ?? "unknown")” has \(completedResources) of \(expectedResources) resources — \(progressPercentage * 100)%.")
