@@ -22,6 +22,9 @@ extension Double {
   }
 }
 
+class StartPointAnnotation: MGLPointAnnotation {
+}
+
 class MapViewController: UIViewController, MGLMapViewDelegate {
   
   var viewModel: MapViewModel?
@@ -57,7 +60,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     self.startCoordinate = viewModel?.startCoordinate() as! CLLocationCoordinate2D
 
     //add start marker
-    let annotation = MGLPointAnnotation()
+    let annotation = StartPointAnnotation()
     annotation.coordinate = self.startCoordinate
     annotation.title = "Start Location"
     annotation.subtitle = "\(viewModel?.title() as! String), \(viewModel?.trail.park?.full_name as! String)"
@@ -69,8 +72,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     let longPress = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
     mapView.addGestureRecognizer(longPress)
     
-    //navigate button
-//    addButton()
+    // Let user know how to add waypoints
+    showAlert(message: "Hi there! Add up to 10 waypoints to your hike by long clicking any area or point of interest!")
+
     
     
     // Setup offline pack notification handlers.
@@ -84,6 +88,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     guard (destinationCoords == nil || destinationCoords.count <= 9)
       else {
         print("Can't add more than 10 points")
+        showAlert(message: "Sorry, currently you can only add up to 10 waypoints.")
         return
     }
     
@@ -156,6 +161,15 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
   }
   
+  //alert message
+  func showAlert(message: String) {
+    let alertController = UIAlertController(title: "Outback", message:
+      message, preferredStyle: UIAlertController.Style.alert)
+    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default,handler: nil))
+    
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
   // Implement the delegate method that allows annotations to show callouts when tapped
   func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
     return true
@@ -164,6 +178,33 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   // Present the navigation view controller when the callout is selected
   func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
   }
+  
+  // This delegate method is where you tell the map to load a view for a specific annotation based on the willUseImage property of the custom subclass.
+  func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+    
+    if let castAnnotation = annotation as? StartPointAnnotation {
+      // Assign a reuse identifier to be used by both of the annotation views, taking advantage of their similarities.
+      let reuseIdentifier = "reusableDotView"
+      
+      // For better performance, always try to reuse existing annotations.
+      var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+      
+      // If there’s no reusable annotation view available, initialize a new one.
+      if annotationView == nil {
+        annotationView = MGLAnnotationView(reuseIdentifier: reuseIdentifier)
+        annotationView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        annotationView?.layer.cornerRadius = (annotationView?.frame.size.width)! / 2
+        annotationView?.layer.borderWidth = 4.0
+        annotationView?.layer.borderColor = UIColor.white.cgColor
+        annotationView!.backgroundColor = UIColor(red: 0.03, green: 0.80, blue: 0.69, alpha: 1.0)
+      }
+      
+      return annotationView
+    
+    }
+    return nil
+  }
+  
   
   
   //offline handling
