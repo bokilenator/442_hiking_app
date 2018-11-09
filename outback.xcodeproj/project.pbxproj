@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7F94EADB44AEA1B59A14AFD5 /* Pods_outbackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B89BB587D08987A0587652 /* Pods_outbackTests.framework */; };
 		9E0750472195ECE3003B47CC /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0750462195ECE2003B47CC /* start.png */; };
+		9E07504A219605D0003B47CC /* TrailDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */; };
+		9E07504C219605FA003B47CC /* ParksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07504B219605FA003B47CC /* ParksViewModelTests.swift */; };
+		9E07504E2196061A003B47CC /* TrailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07504D2196061A003B47CC /* TrailsViewModelTests.swift */; };
+		9E07505021960630003B47CC /* MapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07504F21960630003B47CC /* MapViewModelTests.swift */; };
 		9E28570B219094C700F6D109 /* ParksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28570A219094C700F6D109 /* ParksViewController.swift */; };
 		9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28570C219094FC00F6D109 /* ParksViewModel.swift */; };
 		9E645009218789A200302455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E645008218789A200302455 /* AppDelegate.swift */; };
@@ -47,6 +51,10 @@
 		62A5292AAF198E59A2568D28 /* Pods-outbackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outbackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-outbackTests/Pods-outbackTests.release.xcconfig"; sourceTree = "<group>"; };
 		7890E0ED3F98C47BA9D2A0EF /* Pods-outback.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outback.release.xcconfig"; path = "Pods/Target Support Files/Pods-outback/Pods-outback.release.xcconfig"; sourceTree = "<group>"; };
 		9E0750462195ECE2003B47CC /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
+		9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		9E07504B219605FA003B47CC /* ParksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewModelTests.swift; sourceTree = "<group>"; };
+		9E07504D2196061A003B47CC /* TrailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewModelTests.swift; sourceTree = "<group>"; };
+		9E07504F21960630003B47CC /* MapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModelTests.swift; sourceTree = "<group>"; };
 		9E28570A219094C700F6D109 /* ParksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewController.swift; sourceTree = "<group>"; };
 		9E28570C219094FC00F6D109 /* ParksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewModel.swift; sourceTree = "<group>"; };
 		9E645005218789A200302455 /* outback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outback.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +168,10 @@
 			children = (
 				9E645020218789A400302455 /* outbackTests.swift */,
 				9E645022218789A400302455 /* Info.plist */,
+				9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */,
+				9E07504B219605FA003B47CC /* ParksViewModelTests.swift */,
+				9E07504D2196061A003B47CC /* TrailsViewModelTests.swift */,
+				9E07504F21960630003B47CC /* MapViewModelTests.swift */,
 			);
 			path = outbackTests;
 			sourceTree = "<group>";
@@ -430,7 +442,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E07504C219605FA003B47CC /* ParksViewModelTests.swift in Sources */,
+				9E07504A219605D0003B47CC /* TrailDetailsViewModelTests.swift in Sources */,
 				9E645021218789A400302455 /* outbackTests.swift in Sources */,
+				9E07505021960630003B47CC /* MapViewModelTests.swift in Sources */,
+				9E07504E2196061A003B47CC /* TrailsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
