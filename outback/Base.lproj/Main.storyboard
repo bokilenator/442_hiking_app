@@ -55,7 +55,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Vmd-gZ-HN3" kind="show" identifier="toDetailVC" id="oNF-EM-glh"/>
+                                            <segue destination="fMd-zg-jOh" kind="show" identifier="toDetailVC" id="TEP-xx-xUJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -75,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kq8-RV-Yma" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-820" y="102.99850074962519"/>
+            <point key="canvasLocation" x="-1073" y="103"/>
         </scene>
         <!--Parks View Controller-->
         <scene sceneID="edS-Yc-wJJ">
@@ -142,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiU-jF-2rq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="103"/>
+            <point key="canvasLocation" x="1094" y="103"/>
         </scene>
         <!--Trail Details View Controller-->
         <scene sceneID="0ml-Tu-9zQ">
@@ -228,7 +228,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Download Map"/>
                                 <connections>
-                                    <action selector="downloadMap:" destination="fMd-zg-jOh" eventType="touchUpInside" id="U4a-M1-o0Q"/>
+                                    <segue destination="Vmd-gZ-HN3" kind="show" identifier="toMap" id="qD0-vr-JQm"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Availability:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-wa-Xmf">
@@ -260,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bO2-Ot-TqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-820" y="854"/>
+            <point key="canvasLocation" x="12" y="103"/>
         </scene>
     </scenes>
 </document>

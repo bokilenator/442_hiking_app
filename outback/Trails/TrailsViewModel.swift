@@ -58,7 +58,7 @@ class TrailsViewModel {
         let latitude = swiftyjson["trails"][i]["latitude"].float!
         let condition = swiftyjson["trails"][i]["conditionStatus"].string ?? ""
         let condition_details: String = swiftyjson["trails"][i]["conditionDetails"].string ?? ""
-        let trail = Trail.init(name: name, summary: summary, difficulty: difficulty, rating: rating, url: url, img: img, length: length, longitude: longitude, latitude: latitude, condition: condition, condition_details: condition_details, park: nil)
+        let trail = Trail.init(name: name, summary: summary, difficulty: difficulty, rating: rating, url: url, img: img, length: length, longitude: longitude, latitude: latitude, condition: condition, condition_details: condition_details, park: park, state: "CA") //need to update to get state from search query
         trails.append(trail)
       }
     } catch let error as NSError {
@@ -88,9 +88,9 @@ class TrailsViewModel {
 
   }
   
-  func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> MapViewModel {
+  func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> TrailDetailsViewModel {
     let trail = trails[indexPath.row]
-    return MapViewModel(trail: trail)
+    return TrailDetailsViewModel(trail: trail)
   }
   
 //  func updateFiltering(_ searchText: String) -> Void {
