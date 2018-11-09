@@ -88,9 +88,9 @@ class TrailsViewModel {
 
   }
   
-  func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> TrailDetailViewModel {
+  func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> MapViewModel {
     let trail = trails[indexPath.row]
-    return TrailDetailViewModel(trail: trail)
+    return MapViewModel(trail: trail)
   }
   
 //  func updateFiltering(_ searchText: String) -> Void {

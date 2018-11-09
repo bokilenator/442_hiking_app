@@ -1,5 +1,5 @@
 //
-//  TrailDetailViewModel.swift
+//  MapViewModel.swift
 //  outback
 //
 //  Created by Karan Bokil on 11/1/18.
@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 
-class TrailDetailViewModel {
+class MapViewModel {
   let trail: Trail
   
   init(trail: Trail) {

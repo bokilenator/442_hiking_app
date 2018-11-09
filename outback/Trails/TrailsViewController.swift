@@ -75,7 +75,7 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
   
   // MARK: - Segues
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let detailVC = segue.destination as? TrailDetailViewController,
+    if let detailVC = segue.destination as? MapViewController,
       let indexPath = sender as? IndexPath {
       detailVC.viewModel = viewModel.detailViewModelForRowAtIndexPath(indexPath)
     }

@@ -19,10 +19,10 @@
 		9EF6E249218B3CDB00482BE9 /* TrailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */; };
 		9EF6E24D218B3E8700482BE9 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E24B218B3E8700482BE9 /* TableViewCell.swift */; };
 		9EF6E24E218B3E8700482BE9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */; };
-		9EF6E250218B3ECB00482BE9 /* TrailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E24F218B3ECB00482BE9 /* TrailDetailViewController.swift */; };
+		9EF6E250218B3ECB00482BE9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E24F218B3ECB00482BE9 /* MapViewController.swift */; };
 		9EF6E253218B3FE000482BE9 /* TrailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E252218B3FE000482BE9 /* TrailsViewModel.swift */; };
 		9EF6E256218B429E00482BE9 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E255218B429E00482BE9 /* Trail.swift */; };
-		9EF6E259218B49B200482BE9 /* TrailDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E258218B49B200482BE9 /* TrailDetailViewModel.swift */; };
+		9EF6E259218B49B200482BE9 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E258218B49B200482BE9 /* MapViewModel.swift */; };
 		9EF6E25B218B959700482BE9 /* Park.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E25A218B959700482BE9 /* Park.swift */; };
 		9EF6E25D218B95EE00482BE9 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E25C218B95EE00482BE9 /* Plan.swift */; };
 		C983962136893F59A8157F26 /* Pods_outback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623731199901A639388E8A40 /* Pods_outback.framework */; };
@@ -58,10 +58,10 @@
 		9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewController.swift; sourceTree = "<group>"; };
 		9EF6E24B218B3E8700482BE9 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
-		9EF6E24F218B3ECB00482BE9 /* TrailDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailViewController.swift; sourceTree = "<group>"; };
+		9EF6E24F218B3ECB00482BE9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9EF6E252218B3FE000482BE9 /* TrailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewModel.swift; sourceTree = "<group>"; };
 		9EF6E255218B429E00482BE9 /* Trail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
-		9EF6E258218B49B200482BE9 /* TrailDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailViewModel.swift; sourceTree = "<group>"; };
+		9EF6E258218B49B200482BE9 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		9EF6E25A218B959700482BE9 /* Park.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Park.swift; sourceTree = "<group>"; };
 		9EF6E25C218B95EE00482BE9 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		C8A2A15477554768B277B526 /* Pods-outback.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outback.debug.xcconfig"; path = "Pods/Target Support Files/Pods-outback/Pods-outback.debug.xcconfig"; sourceTree = "<group>"; };
@@ -169,8 +169,6 @@
 		9EF6E251218B3ED300482BE9 /* Trail Details */ = {
 			isa = PBXGroup;
 			children = (
-				9EF6E24F218B3ECB00482BE9 /* TrailDetailViewController.swift */,
-				9EF6E258218B49B200482BE9 /* TrailDetailViewModel.swift */,
 			);
 			path = "Trail Details";
 			sourceTree = "<group>";
@@ -188,6 +186,8 @@
 		9EF6E25E218B999400482BE9 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				9EF6E24F218B3ECB00482BE9 /* MapViewController.swift */,
+				9EF6E258218B49B200482BE9 /* MapViewModel.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -403,9 +403,9 @@
 				9EF6E24D218B3E8700482BE9 /* TableViewCell.swift in Sources */,
 				9EF6E253218B3FE000482BE9 /* TrailsViewModel.swift in Sources */,
 				9EF6E256218B429E00482BE9 /* Trail.swift in Sources */,
-				9EF6E259218B49B200482BE9 /* TrailDetailViewModel.swift in Sources */,
+				9EF6E259218B49B200482BE9 /* MapViewModel.swift in Sources */,
 				9EF6E25D218B95EE00482BE9 /* Plan.swift in Sources */,
-				9EF6E250218B3ECB00482BE9 /* TrailDetailViewController.swift in Sources */,
+				9EF6E250218B3ECB00482BE9 /* MapViewController.swift in Sources */,
 				9E645011218789A200302455 /* outback.xcdatamodeld in Sources */,
 				9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */,
 				9E645009218789A200302455 /* AppDelegate.swift in Sources */,

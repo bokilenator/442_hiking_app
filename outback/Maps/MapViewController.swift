@@ -1,5 +1,5 @@
 //
-//  TrailDetailViewController.swift
+//  MapViewController.swift
 //  outback
 //
 //  Created by Karan Bokil on 11/1/18.
@@ -13,9 +13,9 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 
-class TrailDetailViewController: UIViewController, MGLMapViewDelegate {
+class MapViewController: UIViewController, MGLMapViewDelegate {
   
-  var viewModel: TrailDetailViewModel?
+  var viewModel: MapViewModel?
   var mapView: NavigationMapView!
   var progressView: UIProgressView!
   var directionsRoute: Route?

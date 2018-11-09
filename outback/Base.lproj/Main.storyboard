@@ -129,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="-2084" y="102.99850074962519"/>
         </scene>
-        <!--Trail Detail View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="LzO-kN-DAz">
             <objects>
-                <viewController id="Vmd-gZ-HN3" customClass="TrailDetailViewController" customModule="outback" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vmd-gZ-HN3" customClass="MapViewController" customModule="outback" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fb3-xW-WRE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
