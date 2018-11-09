@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F94EADB44AEA1B59A14AFD5 /* Pods_outbackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B89BB587D08987A0587652 /* Pods_outbackTests.framework */; };
+		9E0750472195ECE3003B47CC /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0750462195ECE2003B47CC /* start.png */; };
 		9E28570B219094C700F6D109 /* ParksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28570A219094C700F6D109 /* ParksViewController.swift */; };
 		9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28570C219094FC00F6D109 /* ParksViewModel.swift */; };
 		9E645009218789A200302455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E645008218789A200302455 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 		623731199901A639388E8A40 /* Pods_outback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_outback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A5292AAF198E59A2568D28 /* Pods-outbackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outbackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-outbackTests/Pods-outbackTests.release.xcconfig"; sourceTree = "<group>"; };
 		7890E0ED3F98C47BA9D2A0EF /* Pods-outback.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outback.release.xcconfig"; path = "Pods/Target Support Files/Pods-outback/Pods-outback.release.xcconfig"; sourceTree = "<group>"; };
+		9E0750462195ECE2003B47CC /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 		9E28570A219094C700F6D109 /* ParksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewController.swift; sourceTree = "<group>"; };
 		9E28570C219094FC00F6D109 /* ParksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewModel.swift; sourceTree = "<group>"; };
 		9E645005218789A200302455 /* outback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = outback.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */,
 				9E64500C218789A200302455 /* Main.storyboard */,
 				9E645012218789A400302455 /* Assets.xcassets */,
+				9E0750462195ECE2003B47CC /* start.png */,
 				9E645014218789A400302455 /* LaunchScreen.storyboard */,
 				9E645017218789A400302455 /* Info.plist */,
 				9E64500F218789A200302455 /* outback.xcdatamodeld */,
@@ -293,6 +296,7 @@
 			files = (
 				9E645016218789A400302455 /* LaunchScreen.storyboard in Resources */,
 				9EF6E24E218B3E8700482BE9 /* TableViewCell.xib in Resources */,
+				9E0750472195ECE3003B47CC /* start.png in Resources */,
 				9E645013218789A400302455 /* Assets.xcassets in Resources */,
 				9E64500E218789A200302455 /* Main.storyboard in Resources */,
 			);

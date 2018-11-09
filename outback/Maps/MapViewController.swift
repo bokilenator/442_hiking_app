@@ -81,6 +81,11 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
   @objc func didLongPress(_ sender: UILongPressGestureRecognizer) {
     guard sender.state == .began else { return }
+    guard (destinationCoords == nil || destinationCoords.count <= 9)
+      else {
+        print("Can't add more than 10 points")
+        return
+    }
     
     // Converts point where user did a long press to map coordinates
     let point = sender.location(in: mapView)
@@ -250,6 +255,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   }
   
 }
+
 
 
 
