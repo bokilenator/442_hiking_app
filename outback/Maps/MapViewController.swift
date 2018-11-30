@@ -170,6 +170,36 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         plan.addToCoordinates(coordinate)
       }
     }
+    
+    let parkdata = ParkData(context: context)
+    let park = viewModel?.trail.park
+    parkdata.desc = park?.description
+//    parkdata.entrance_fees = park?.entrance_fees
+    parkdata.full_name = park?.full_name
+    parkdata.image = park?.image
+    parkdata.latitude = park?.latitude
+    parkdata.longitude = park?.longitude
+//    parkdata.operating_hours = park?.operating_hours as! JSON
+    parkdata.states = park?.states
+    parkdata.url = park?.url
+    parkdata.weatherInfo = park?.weatherInfo
+    
+    let traildata = TrailData(context: context)
+    let trail = viewModel?.trail
+    traildata.name = trail?.name
+    traildata.summary = trail?.summary
+    traildata.difficulty = trail?.difficulty
+    traildata.rating = trail?.rating ?? 5.0
+    traildata.url = trail?.url
+    traildata.img = trail?.img
+    traildata.length = Int16(trail?.length as! Int)
+    traildata.longitude = trail?.longitude ?? 0.0
+    traildata.latitude = trail?.latitude ?? 0.0
+    traildata.condition = trail?.condition
+    traildata.condition_details = trail?.condition_details
+    traildata.state = trail?.state
+    
+    
 
     do {
       try context.save()
@@ -324,6 +354,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
   func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
     // Hide the callout view.
+    
     if let index = destinationCoords.index(of:annotation.coordinate) {
       destinationCoords.remove(at: index)
       if (destinationCoords.count < 1) {
