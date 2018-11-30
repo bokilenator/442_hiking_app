@@ -37,11 +37,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
   var startCoordinate = CLLocationCoordinate2D(latitude: 37.734328, longitude: -119.601744)
   
-  var appDelegate: AppDelegate!
-  var context: NSManagedObjectContext!
-  var entity: NSEntityDescription?
-  var newPlan: NSManagedObject!
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -52,15 +47,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     super.viewDidLoad()
     //Add save button
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
-        
-    //Start core data
-    appDelegate = UIApplication.shared.delegate as! AppDelegate
-    context = appDelegate.persistentContainer.viewContext
-    entity = NSEntityDescription.entity(forEntityName: "Plans", in: context)
-    newPlan = NSManagedObject(entity: entity!, insertInto: context)
-    
-    
-    
     
     // Do any additional setup after loading the view, typically from a nib.
     mapView = NavigationMapView(frame: view.bounds)
@@ -92,34 +78,44 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     showAlert(message: "Hi there! Add up to 10 waypoints to your hike by long clicking any area or point of interest!")
     
     //Load Core Data
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Plans")
+    clearPolyLine()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Plan")
     request.returnsObjectsAsFaults = false
     do {
       let result = try context.fetch(request)
       for data in result as! [NSManagedObject] {
-        if let trail_name:String = data.value(forKey: "trail_name") as? String {
-          if (trail_name == viewModel?.title()) {
-            print(trail_name)
+        if let plan:Plan = data as? Plan {
+          if (plan.trail_name == viewModel?.title()) {
+            print(plan.trail_name)
             //Add route
-            if let route:MGLPolyline = data.value(forKey: "route") as? MGLPolyline {
+            if let route:MGLPolyline = plan.route as? MGLPolyline {
               routePolyLine = route
               mapView.addAnnotation(routePolyLine)
             }
             //Add waypoints
-//            if let coords:[CLLocationCoordinate2D] = data.value(forKey: "coords") as? [CLLocationCoordinate2D] {
-//              for coord in coords {
-//                let annotation = MGLPointAnnotation()
-//                annotation.coordinate = coord
-//                annotation.title = "Remove Waypoint"
-//                mapView.addAnnotation(annotation)
-//              }
-//            }
+            for item in plan.coordinates ?? [] {
+              if let coord:Coordinate = item as! Coordinate {
+                let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
+                
+                if (destinationCoords == nil) {
+                  destinationCoords = []
+                }
+                destinationCoords.append(coordinate)
+                
+                let annotation = MGLPointAnnotation()
+                annotation.coordinate = coordinate
+                annotation.title = "Remove Waypoint"
+                mapView.addAnnotation(annotation)
+              }
+            }
           }
         }
       }
-      
+
     } catch {
-      
+
       print("Failed")
     }
 
@@ -134,13 +130,54 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
     
     //save to core data
-    newPlan.setValue(viewModel!.title(), forKey: "trail_name")
-    newPlan.setValue(routePolyLine, forKey: "route")
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Plan")
+    request.returnsObjectsAsFaults = false
+    do {
+      let result = try context.fetch(request)
+      for data in result as! [NSManagedObject] {
+        if let plan:Plan = data as? Plan {
+          if (plan.trail_name == viewModel?.title()) {
+            //Delete waypoints
+            for item in plan.coordinates ?? [] {
+              if let coord:Coordinate = item as! Coordinate {
+                context.delete(coord)
+              }
+            }
+            context.delete(plan)
+          }
+        }
+      }
+      
+    } catch {
+      
+      print("Failed")
+    }
+    
+    
+    
+    let plan = Plan(context: context)
+    plan.trail_name = viewModel!.title()
+    plan.route = routePolyLine
+ 
+    if (destinationCoords != nil || destinationCoords.count > 0) {
+      for coord in destinationCoords {
+        let coordinate = Coordinate(context: context)
+        coordinate.latitude = coord.latitude
+        coordinate.longitude = coord.longitude
+        plan.addToCoordinates(coordinate)
+      }
+    }
+
     do {
       try context.save()
     } catch {
       print("Failed saving")
     }
+
+
   }
   
   @objc func didLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -243,6 +280,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     if (routePolyLine != nil) {
       mapView.removeAnnotation(routePolyLine)
     }
+    routePolyLine = nil
   }
   
   func destinationCoordsToString() -> String {
