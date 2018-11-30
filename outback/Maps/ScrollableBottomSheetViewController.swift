@@ -11,6 +11,13 @@ import UIKit
 class ScrollableBottomSheetViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
 //    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var trailNameLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var nationalParkLabel: UILabel!
+    @IBOutlet weak var datesLabel: UILabel!
+    @IBOutlet weak var availabilityLabel: UILabel!
+  
     let fullView: CGFloat = 100
     var mapController: MapViewController!
     var partialView: CGFloat {
@@ -23,8 +30,6 @@ class ScrollableBottomSheetViewController: UIViewController {
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //        tableView.register(UINib(nibName: "DefaultTableViewCell", bundle: nil), forCellReuseIdentifier: "default")
-      
-        
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(ScrollableBottomSheetViewController.panGesture))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
@@ -43,6 +48,11 @@ class ScrollableBottomSheetViewController: UIViewController {
             let yComponent = self?.partialView
             self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
             })
+      trailNameLabel.text = mapController.viewModel?.title()
+      distanceLabel.text = String(mapController.viewModel!.trail.length) + " mi"
+      stateLabel.text = mapController.viewModel?.trail.state
+      nationalParkLabel.text = mapController.viewModel?.trail.park?.full_name
+
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,7 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScrollableBottomSheetViewController" customModule="outback" customModuleProvider="target">
             <connections>
+                <outlet property="distanceLabel" destination="hPd-YZ-sP0" id="TvA-zh-em1"/>
                 <outlet property="headerView" destination="Jqb-lC-sL5" id="2Bt-iO-hyv"/>
+                <outlet property="nationalParkLabel" destination="YiK-5m-xHg" id="BQL-Vu-mGj"/>
+                <outlet property="stateLabel" destination="9br-GR-ORh" id="d2o-FU-MA3"/>
+                <outlet property="trailNameLabel" destination="Vro-rc-h1v" id="FGL-KA-rqo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,7 +27,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jqb-lC-sL5">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQ6-GT-8BW">
                                     <rect key="frame" x="138.33333333333334" y="16" width="34" height="30"/>
@@ -38,6 +42,30 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Trail Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vro-rc-h1v">
+                                    <rect key="frame" x="166.33333333333334" y="100" width="81.333333333333343" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="11 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPd-YZ-sP0">
+                                    <rect key="frame" x="188" y="162" width="38" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9br-GR-ORh">
+                                    <rect key="frame" x="187" y="233" width="40.333333333333343" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="National Park" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiK-5m-xHg">
+                                    <rect key="frame" x="156.33333333333334" y="301" width="101.33333333333334" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-ty-Do8">
                                     <rect key="frame" x="234.33333333333334" y="17" width="36.000000000000028" height="30"/>
                                     <state key="normal" title="Clear"/>
@@ -48,11 +76,19 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="YiK-5m-xHg" firstAttribute="centerX" secondItem="9br-GR-ORh" secondAttribute="centerX" id="0vP-PT-KpP"/>
+                                <constraint firstItem="Vro-rc-h1v" firstAttribute="top" secondItem="AZT-oQ-UY9" secondAttribute="bottom" constant="58" id="6og-QI-7rz"/>
+                                <constraint firstItem="9br-GR-ORh" firstAttribute="top" secondItem="hPd-YZ-sP0" secondAttribute="bottom" constant="50" id="8As-AK-Kwe"/>
+                                <constraint firstItem="hPd-YZ-sP0" firstAttribute="centerX" secondItem="Vro-rc-h1v" secondAttribute="centerX" id="MK0-AI-vvv"/>
                                 <constraint firstAttribute="height" constant="50" id="Tl2-jg-Adq"/>
                                 <constraint firstItem="TQ6-GT-8BW" firstAttribute="centerX" secondItem="Jqb-lC-sL5" secondAttribute="centerX" id="Xcq-nC-qJh"/>
                                 <constraint firstItem="AZT-oQ-UY9" firstAttribute="centerX" secondItem="Jqb-lC-sL5" secondAttribute="centerX" id="dEo-xh-fk3"/>
                                 <constraint firstItem="a9g-ty-Do8" firstAttribute="leading" secondItem="AZT-oQ-UY9" secondAttribute="trailing" constant="25" id="dHg-ki-TWZ"/>
                                 <constraint firstItem="AZT-oQ-UY9" firstAttribute="leading" secondItem="TQ6-GT-8BW" secondAttribute="trailing" constant="32.333333333333343" id="diC-iJ-hjy"/>
+                                <constraint firstItem="9br-GR-ORh" firstAttribute="centerX" secondItem="hPd-YZ-sP0" secondAttribute="centerX" id="eg7-I0-t8g"/>
+                                <constraint firstItem="YiK-5m-xHg" firstAttribute="top" secondItem="9br-GR-ORh" secondAttribute="bottom" constant="47" id="g3x-MU-AyL"/>
+                                <constraint firstItem="hPd-YZ-sP0" firstAttribute="top" secondItem="Vro-rc-h1v" secondAttribute="bottom" constant="41" id="hps-LZ-yXv"/>
+                                <constraint firstItem="Vro-rc-h1v" firstAttribute="centerX" secondItem="AZT-oQ-UY9" secondAttribute="centerX" id="t0T-uo-jCd"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -60,10 +96,6 @@
                                 </mask>
                             </variation>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GSW-2o-otm">
-                            <rect key="frame" x="0.0" y="50" width="414" height="686"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </tableView>
                     </subviews>
                 </stackView>
             </subviews>
