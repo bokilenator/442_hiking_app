@@ -13,7 +13,6 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 import SwiftyJSON
-import SwiftyButton
 
 extension Double {
   /// Rounds the double to decimal places value
@@ -37,6 +36,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   var startCoordinate = CLLocationCoordinate2D(latitude: 37.734328, longitude: -119.601744)
   var endCoordinate = CLLocationCoordinate2D(latitude: 37.728628, longitude: -119.573124)
   
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -45,7 +45,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    //Add save button
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
+
 
     // Do any additional setup after loading the view, typically from a nib.
     mapView = NavigationMapView(frame: view.bounds)
@@ -76,12 +78,17 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     // Let user know how to add waypoints
     showAlert(message: "Hi there! Add up to 10 waypoints to your hike by long clicking any area or point of interest!")
 
-    
-    
+  }
+  
+//  Save button
+  @objc func saveTapped(sender: AnyObject) {
+    showAlert(message: "Saving map!")
     // Setup offline pack notification handlers.
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
+    
+    //save to core data
   }
   
   @objc func didLongPress(_ sender: UILongPressGestureRecognizer) {

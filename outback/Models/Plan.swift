@@ -7,10 +7,27 @@
 //
 
 import Foundation
-struct Plan {
-  let trail: Trail
-  let startDate: NSDate
-  let endDate: NSDate
+import Mapbox
+import CoreData
+
+struct Route {
+//  let trail: Trail
+//  let startDate: NSDate
+//  let endDate: NSDate
+  let routePolyLine: MGLPolyline
+
+}
+
+class Plan: NSManagedObject {
   
+  @NSManaged var routePolyLine: MGLPolyline
   
+  var route : Route {
+    get {
+      return Route(routePolyLine: self.routePolyLine)
+    }
+    set {
+      self.routePolyLine = newValue.routePolyLine
+    }
+  }
 }
