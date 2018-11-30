@@ -43,6 +43,11 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     self.title = viewModel?.title()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    addBottomSheetView()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     //Add save button
@@ -482,6 +487,19 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
       let maximumCount = (notification.userInfo?[MGLOfflinePackUserInfoKey.maximumCount] as AnyObject).uint64Value {
       print("Offline pack “\(userInfo["name"] ?? "unknown")” reached limit of \(maximumCount) tiles.")
     }
+  }
+  
+  //Bottom drawer
+  func addBottomSheetView(scrollable: Bool? = true) {
+    let bottomSheetVC = scrollable! ? ScrollableBottomSheetViewController() : BottomSheetViewController()
+    
+    self.addChild(bottomSheetVC)
+    self.view.addSubview(bottomSheetVC.view)
+    bottomSheetVC.didMove(toParent: self)
+    
+    let height = view.frame.height
+    let width  = view.frame.width
+    bottomSheetVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
   }
   
 }

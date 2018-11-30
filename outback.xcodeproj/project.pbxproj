@@ -21,6 +21,12 @@
 		9E645016218789A400302455 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E645014218789A400302455 /* LaunchScreen.storyboard */; };
 		9E645021218789A400302455 /* outbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E645020218789A400302455 /* outbackTests.swift */; };
 		9E8E179221B0E8750013DE34 /* DeletePointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179121B0E8750013DE34 /* DeletePointButton.swift */; };
+		9E8E179B21B141CF0013DE34 /* ScrollableBottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8E179521B141CE0013DE34 /* ScrollableBottomSheetViewController.xib */; };
+		9E8E179C21B141CF0013DE34 /* ScrollableBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */; };
+		9E8E179D21B141CF0013DE34 /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8E179721B141CF0013DE34 /* DefaultTableViewCell.xib */; };
+		9E8E179E21B141CF0013DE34 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179821B141CF0013DE34 /* BottomSheetViewController.swift */; };
+		9E8E179F21B141CF0013DE34 /* BottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8E179921B141CF0013DE34 /* BottomSheetViewController.xib */; };
+		9E8E17A021B141CF0013DE34 /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179A21B141CF0013DE34 /* DefaultTableViewCell.swift */; };
 		9EF0E5C621959BCB0021A47B /* TrailDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF0E5C521959BCB0021A47B /* TrailDetailsViewController.swift */; };
 		9EF0E5C821959D6D0021A47B /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF0E5C721959D6D0021A47B /* MapViewModel.swift */; };
 		9EF6E249218B3CDB00482BE9 /* TrailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */; };
@@ -66,6 +72,12 @@
 		9E645020218789A400302455 /* outbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outbackTests.swift; sourceTree = "<group>"; };
 		9E645022218789A400302455 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8E179121B0E8750013DE34 /* DeletePointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePointButton.swift; sourceTree = "<group>"; };
+		9E8E179521B141CE0013DE34 /* ScrollableBottomSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableBottomSheetViewController.xib; sourceTree = "<group>"; };
+		9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableBottomSheetViewController.swift; sourceTree = "<group>"; };
+		9E8E179721B141CF0013DE34 /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
+		9E8E179821B141CF0013DE34 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		9E8E179921B141CF0013DE34 /* BottomSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomSheetViewController.xib; sourceTree = "<group>"; };
+		9E8E179A21B141CF0013DE34 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
 		9EF0E5C521959BCB0021A47B /* TrailDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailsViewController.swift; sourceTree = "<group>"; };
 		9EF0E5C721959D6D0021A47B /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +224,12 @@
 		9EF6E25E218B999400482BE9 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				9E8E179821B141CF0013DE34 /* BottomSheetViewController.swift */,
+				9E8E179921B141CF0013DE34 /* BottomSheetViewController.xib */,
+				9E8E179A21B141CF0013DE34 /* DefaultTableViewCell.swift */,
+				9E8E179721B141CF0013DE34 /* DefaultTableViewCell.xib */,
+				9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */,
+				9E8E179521B141CE0013DE34 /* ScrollableBottomSheetViewController.xib */,
 				9EF6E24F218B3ECB00482BE9 /* MapViewController.swift */,
 				9EF0E5C721959D6D0021A47B /* MapViewModel.swift */,
 			);
@@ -312,7 +330,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E645016218789A400302455 /* LaunchScreen.storyboard in Resources */,
+				9E8E179F21B141CF0013DE34 /* BottomSheetViewController.xib in Resources */,
+				9E8E179B21B141CF0013DE34 /* ScrollableBottomSheetViewController.xib in Resources */,
 				9EF6E24E218B3E8700482BE9 /* TableViewCell.xib in Resources */,
+				9E8E179D21B141CF0013DE34 /* DefaultTableViewCell.xib in Resources */,
 				9E645013218789A400302455 /* Assets.xcassets in Resources */,
 				9E64500E218789A200302455 /* Main.storyboard in Resources */,
 			);
@@ -432,7 +453,10 @@
 				9EF6E24D218B3E8700482BE9 /* TableViewCell.swift in Sources */,
 				9EF6E253218B3FE000482BE9 /* TrailsViewModel.swift in Sources */,
 				9EF6E256218B429E00482BE9 /* Trail.swift in Sources */,
+				9E8E179C21B141CF0013DE34 /* ScrollableBottomSheetViewController.swift in Sources */,
 				9EF6E259218B49B200482BE9 /* TrailDetailsViewModel.swift in Sources */,
+				9E8E17A021B141CF0013DE34 /* DefaultTableViewCell.swift in Sources */,
+				9E8E179E21B141CF0013DE34 /* BottomSheetViewController.swift in Sources */,
 				9EF6E250218B3ECB00482BE9 /* MapViewController.swift in Sources */,
 				9E645011218789A200302455 /* outback.xcdatamodeld in Sources */,
 				9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */,
