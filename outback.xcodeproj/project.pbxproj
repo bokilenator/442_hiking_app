@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7F94EADB44AEA1B59A14AFD5 /* Pods_outbackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B89BB587D08987A0587652 /* Pods_outbackTests.framework */; };
-		9E0750472195ECE3003B47CC /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0750462195ECE2003B47CC /* start.png */; };
 		9E07504A219605D0003B47CC /* TrailDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */; };
 		9E07504C219605FA003B47CC /* ParksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07504B219605FA003B47CC /* ParksViewModelTests.swift */; };
 		9E07504E2196061A003B47CC /* TrailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07504D2196061A003B47CC /* TrailsViewModelTests.swift */; };
@@ -21,6 +20,7 @@
 		9E645013218789A400302455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E645012218789A400302455 /* Assets.xcassets */; };
 		9E645016218789A400302455 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E645014218789A400302455 /* LaunchScreen.storyboard */; };
 		9E645021218789A400302455 /* outbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E645020218789A400302455 /* outbackTests.swift */; };
+		9E8E179221B0E8750013DE34 /* DeletePointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179121B0E8750013DE34 /* DeletePointButton.swift */; };
 		9EF0E5C621959BCB0021A47B /* TrailDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF0E5C521959BCB0021A47B /* TrailDetailsViewController.swift */; };
 		9EF0E5C821959D6D0021A47B /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF0E5C721959D6D0021A47B /* MapViewModel.swift */; };
 		9EF6E249218B3CDB00482BE9 /* TrailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */; };
@@ -50,7 +50,6 @@
 		623731199901A639388E8A40 /* Pods_outback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_outback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A5292AAF198E59A2568D28 /* Pods-outbackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outbackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-outbackTests/Pods-outbackTests.release.xcconfig"; sourceTree = "<group>"; };
 		7890E0ED3F98C47BA9D2A0EF /* Pods-outback.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outback.release.xcconfig"; path = "Pods/Target Support Files/Pods-outback/Pods-outback.release.xcconfig"; sourceTree = "<group>"; };
-		9E0750462195ECE2003B47CC /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 		9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		9E07504B219605FA003B47CC /* ParksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewModelTests.swift; sourceTree = "<group>"; };
 		9E07504D2196061A003B47CC /* TrailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewModelTests.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		9E64501C218789A400302455 /* outbackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = outbackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E645020218789A400302455 /* outbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outbackTests.swift; sourceTree = "<group>"; };
 		9E645022218789A400302455 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E8E179121B0E8750013DE34 /* DeletePointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePointButton.swift; sourceTree = "<group>"; };
 		9EF0E5C521959BCB0021A47B /* TrailDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailsViewController.swift; sourceTree = "<group>"; };
 		9EF0E5C721959D6D0021A47B /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +145,7 @@
 		9E645007218789A200302455 /* outback */ = {
 			isa = PBXGroup;
 			children = (
+				9E8E179021B0E8180013DE34 /* Nibs */,
 				9EF0E5C4219599F50021A47B /* Trail Details */,
 				9EF6E25F218B99BD00482BE9 /* Parks */,
 				9EF6E25E218B999400482BE9 /* Maps */,
@@ -155,7 +156,6 @@
 				9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */,
 				9E64500C218789A200302455 /* Main.storyboard */,
 				9E645012218789A400302455 /* Assets.xcassets */,
-				9E0750462195ECE2003B47CC /* start.png */,
 				9E645014218789A400302455 /* LaunchScreen.storyboard */,
 				9E645017218789A400302455 /* Info.plist */,
 				9E64500F218789A200302455 /* outback.xcdatamodeld */,
@@ -174,6 +174,14 @@
 				9E07504F21960630003B47CC /* MapViewModelTests.swift */,
 			);
 			path = outbackTests;
+			sourceTree = "<group>";
+		};
+		9E8E179021B0E8180013DE34 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				9E8E179121B0E8750013DE34 /* DeletePointButton.swift */,
+			);
+			path = Nibs;
 			sourceTree = "<group>";
 		};
 		9EF0E5C4219599F50021A47B /* Trail Details */ = {
@@ -308,7 +316,6 @@
 			files = (
 				9E645016218789A400302455 /* LaunchScreen.storyboard in Resources */,
 				9EF6E24E218B3E8700482BE9 /* TableViewCell.xib in Resources */,
-				9E0750472195ECE3003B47CC /* start.png in Resources */,
 				9E645013218789A400302455 /* Assets.xcassets in Resources */,
 				9E64500E218789A200302455 /* Main.storyboard in Resources */,
 			);
@@ -431,6 +438,7 @@
 				9EF6E250218B3ECB00482BE9 /* MapViewController.swift in Sources */,
 				9E645011218789A200302455 /* outback.xcdatamodeld in Sources */,
 				9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */,
+				9E8E179221B0E8750013DE34 /* DeletePointButton.swift in Sources */,
 				9E645009218789A200302455 /* AppDelegate.swift in Sources */,
 				9EF0E5C821959D6D0021A47B /* MapViewModel.swift in Sources */,
 				9EF6E25B218B959700482BE9 /* Park.swift in Sources */,

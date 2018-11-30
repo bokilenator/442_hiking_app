@@ -99,7 +99,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     // Create a basic point annotation and add it to the map
     let annotation = MGLPointAnnotation()
     annotation.coordinate = coordinate
-    annotation.title = "Waypoint: \(coordinate.latitude.rounded(toPlaces: 3)), \(coordinate.longitude.rounded(toPlaces: 3))"
+    annotation.title = "Remove Waypoint"
     mapView.addAnnotation(annotation)
     
     
@@ -123,6 +123,39 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     let originString = "\(origin.longitude),\(origin.latitude);"
     let destinationString = destinationCoordsToString()
     let midPointString = "\(origin.longitude - 0.0001),\(origin.latitude)"
+    let distributionString = "1,2"
+    
+    let url:String = "https://api.mapbox.com/optimized-trips/v1/mapbox/walking/" + originString + destinationString + midPointString + "?distributions=" + distributionString + "&overview=full&steps=true&geometries=geojson&source=first&access_token=" + accessToken
+    let optURL: NSURL = NSURL(string: url)!
+    let data = NSData(contentsOf: optURL as URL)!
+    
+    do {
+      let swiftyjson = try JSON(data: data as Data)
+      let coords = swiftyjson["trips"][0]["geometry"]["coordinates"].array
+      var coordinates:[CLLocationCoordinate2D] = []
+      for coord in coords ?? [] {
+        let c = coord.arrayValue
+        coordinates.append(CLLocationCoordinate2D(latitude: c[1].doubleValue, longitude: c[0].doubleValue))
+      }
+      print(coordinates)
+      routePolyLine = MGLPolyline(coordinates: &coordinates, count: UInt(coordinates.count))
+      mapView.addAnnotation(routePolyLine)
+    } catch let error as NSError {
+      print(error)
+    }
+    
+  }
+  
+  func calculateOptimizedRoute() {
+    if (destinationCoords == nil) {
+      destinationCoords = []
+    }
+    clearPolyLine()
+    //Mapbox geojson uses long, lat!
+    let accessToken = "sk.eyJ1Ijoia2Jva2lsIiwiYSI6ImNqbXhteHZmeTBjangzcWxydHRjbHc2MXAifQ.y5ybeyL8pcy0L2Z9aPTSSg"
+    let originString = "\(startCoordinate.longitude),\(startCoordinate.latitude);"
+    let destinationString = destinationCoordsToString()
+    let midPointString = "\(startCoordinate.longitude - 0.0001),\(startCoordinate.latitude)"
     let distributionString = "1,2"
     
     let url:String = "https://api.mapbox.com/optimized-trips/v1/mapbox/walking/" + originString + destinationString + midPointString + "?distributions=" + distributionString + "&overview=full&steps=true&geometries=geojson&source=first&access_token=" + accessToken
@@ -177,6 +210,36 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
   // Present the navigation view controller when the callout is selected
   func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+  }
+  
+  // Button for annotation
+  func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+    if (annotation is StartPointAnnotation) {
+      return nil
+    }
+    return UIButton(type: .detailDisclosure)
+    return DeletePointButton()
+  }
+  
+  
+  func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
+    // Hide the callout view.
+    if let index = destinationCoords.index(of:annotation.coordinate) {
+      destinationCoords.remove(at: index)
+      if (destinationCoords.count < 1) {
+        clearPolyLine()
+      } else {
+        calculateOptimizedRoute()
+
+      }
+    }
+    mapView.removeAnnotation(annotation)
+    
+    // Show an alert containing the annotation's details
+    let alert = UIAlertController(title: annotation.title!!, message: "A lovely (if touristy) place.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+    
   }
   
   // This delegate method is where you tell the map to load a view for a specific annotation based on the willUseImage property of the custom subclass.
