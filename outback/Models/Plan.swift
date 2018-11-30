@@ -10,24 +10,12 @@ import Foundation
 import Mapbox
 import CoreData
 
-struct Route {
+class Plan:NSManagedObject {
 //  let trail: Trail
 //  let startDate: NSDate
 //  let endDate: NSDate
-  let routePolyLine: MGLPolyline
-
-}
-
-class Plan: NSManagedObject {
-  
+  @NSManaged var name: String
   @NSManaged var routePolyLine: MGLPolyline
-  
-  var route : Route {
-    get {
-      return Route(routePolyLine: self.routePolyLine)
-    }
-    set {
-      self.routePolyLine = newValue.routePolyLine
-    }
-  }
+  @NSManaged var coordinates: [CLLocationCoordinate2D]
+
 }

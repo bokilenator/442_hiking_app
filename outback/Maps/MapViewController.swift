@@ -13,6 +13,7 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 import SwiftyJSON
+import CoreData
 
 extension Double {
   /// Rounds the double to decimal places value
@@ -27,6 +28,7 @@ class StartPointAnnotation: MGLPointAnnotation {
 
 class MapViewController: UIViewController, MGLMapViewDelegate {
   
+  
   var viewModel: MapViewModel?
   var mapView: NavigationMapView!
   var progressView: UIProgressView!
@@ -34,8 +36,11 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   var destinationCoords: [CLLocationCoordinate2D]!
   
   var startCoordinate = CLLocationCoordinate2D(latitude: 37.734328, longitude: -119.601744)
-  var endCoordinate = CLLocationCoordinate2D(latitude: 37.728628, longitude: -119.573124)
   
+  var appDelegate: AppDelegate!
+  var context: NSManagedObjectContext!
+  var entity: NSEntityDescription?
+  var newPlan: NSManagedObject!
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -47,8 +52,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     super.viewDidLoad()
     //Add save button
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
-
-
+        
+    //Start core data
+    appDelegate = UIApplication.shared.delegate as! AppDelegate
+    context = appDelegate.persistentContainer.viewContext
+    entity = NSEntityDescription.entity(forEntityName: "Plans", in: context)
+    newPlan = NSManagedObject(entity: entity!, insertInto: context)
+    
+    
+    
+    
     // Do any additional setup after loading the view, typically from a nib.
     mapView = NavigationMapView(frame: view.bounds)
     mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -77,6 +90,38 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     // Let user know how to add waypoints
     showAlert(message: "Hi there! Add up to 10 waypoints to your hike by long clicking any area or point of interest!")
+    
+    //Load Core Data
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Plans")
+    request.returnsObjectsAsFaults = false
+    do {
+      let result = try context.fetch(request)
+      for data in result as! [NSManagedObject] {
+        if let trail_name:String = data.value(forKey: "trail_name") as? String {
+          if (trail_name == viewModel?.title()) {
+            print(trail_name)
+            //Add route
+            if let route:MGLPolyline = data.value(forKey: "route") as? MGLPolyline {
+              routePolyLine = route
+              mapView.addAnnotation(routePolyLine)
+            }
+            //Add waypoints
+//            if let coords:[CLLocationCoordinate2D] = data.value(forKey: "coords") as? [CLLocationCoordinate2D] {
+//              for coord in coords {
+//                let annotation = MGLPointAnnotation()
+//                annotation.coordinate = coord
+//                annotation.title = "Remove Waypoint"
+//                mapView.addAnnotation(annotation)
+//              }
+//            }
+          }
+        }
+      }
+      
+    } catch {
+      
+      print("Failed")
+    }
 
   }
   
@@ -89,6 +134,13 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
     
     //save to core data
+    newPlan.setValue(viewModel!.title(), forKey: "trail_name")
+    newPlan.setValue(routePolyLine, forKey: "route")
+    do {
+      try context.save()
+    } catch {
+      print("Failed saving")
+    }
   }
   
   @objc func didLongPress(_ sender: UILongPressGestureRecognizer) {

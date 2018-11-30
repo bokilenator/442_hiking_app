@@ -152,8 +152,6 @@
 				9EF6E254218B428D00482BE9 /* Models */,
 				9EF6E24A218B3CE300482BE9 /* Trails */,
 				9E645008218789A200302455 /* AppDelegate.swift */,
-				9EF6E24B218B3E8700482BE9 /* TableViewCell.swift */,
-				9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */,
 				9E64500C218789A200302455 /* Main.storyboard */,
 				9E645012218789A400302455 /* Assets.xcassets */,
 				9E645014218789A400302455 /* LaunchScreen.storyboard */,
@@ -179,6 +177,8 @@
 		9E8E179021B0E8180013DE34 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				9EF6E24B218B3E8700482BE9 /* TableViewCell.swift */,
+				9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */,
 				9E8E179121B0E8750013DE34 /* DeletePointButton.swift */,
 			);
 			path = Nibs;
