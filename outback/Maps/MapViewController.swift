@@ -13,6 +13,7 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 import SwiftyJSON
+import SwiftyButton
 
 extension Double {
   /// Rounds the double to decimal places value
@@ -217,8 +218,10 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     if (annotation is StartPointAnnotation) {
       return nil
     }
-    return UIButton(type: .detailDisclosure)
-    return DeletePointButton()
+    let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    deleteButton.setImage(UIImage(named: "deleteButton")!, for: .normal)
+    return deleteButton
+
   }
   
   
@@ -234,11 +237,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
       }
     }
     mapView.removeAnnotation(annotation)
-    
-    // Show an alert containing the annotation's details
-    let alert = UIAlertController(title: annotation.title!!, message: "A lovely (if touristy) place.", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    self.present(alert, animated: true, completion: nil)
     
   }
   
