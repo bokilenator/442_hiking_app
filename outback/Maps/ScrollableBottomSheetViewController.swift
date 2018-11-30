@@ -11,21 +11,19 @@ import UIKit
 class ScrollableBottomSheetViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     let fullView: CGFloat = 100
+    var mapController: MapViewController!
     var partialView: CGFloat {
         return UIScreen.main.bounds.height - 150
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "DefaultTableViewCell", bundle: nil), forCellReuseIdentifier: "default")
         
-        searchBar.isUserInteractionEnabled = false
         
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(ScrollableBottomSheetViewController.panGesture))
         gesture.delegate = self
@@ -51,6 +49,16 @@ class ScrollableBottomSheetViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
+
+  
+  @IBAction func savedPressed(sender: UIButton) {
+    mapController.save()
+  }
+  
+  @IBAction func clearPressed(sender: UIButton) {
+    mapController.clear()
+  }
     
   @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
         

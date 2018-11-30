@@ -51,7 +51,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     //Add save button
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
+//    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
     
     // Do any additional setup after loading the view, typically from a nib.
     mapView = NavigationMapView(frame: view.bounds)
@@ -127,7 +127,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   }
   
 //  Save button
-  @objc func saveTapped(sender: AnyObject) {
+  func save() {
     showAlert(message: "Saving map!")
     // Setup offline pack notification handlers.
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
@@ -166,7 +166,10 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     let plan = Plan(context: context)
     plan.trail_name = viewModel!.title()
     plan.route = routePolyLine
- 
+    
+    if (destinationCoords == nil) {
+      return
+    }
     if (destinationCoords != nil || destinationCoords.count > 0) {
       for coord in destinationCoords {
         let coordinate = Coordinate(context: context)
@@ -309,6 +312,22 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
       print(error)
     }
     
+  }
+  
+  func clear() {
+    destinationCoords = []
+    clearPolyLine()
+    guard let annotations = mapView.annotations else { return print("Annotations Error") }
+    if annotations.count != 0 {
+      for annotation in annotations {
+        if (annotation is StartPointAnnotation) {
+        } else {
+          mapView.removeAnnotation(annotation)
+        }
+      }
+    } else {
+      return
+    }
   }
   
   func clearPolyLine() {
@@ -491,7 +510,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
   //Bottom drawer
   func addBottomSheetView(scrollable: Bool? = true) {
-    let bottomSheetVC = scrollable! ? ScrollableBottomSheetViewController() : BottomSheetViewController()
+    let bottomSheetVC:ScrollableBottomSheetViewController = ScrollableBottomSheetViewController()
     
     self.addChild(bottomSheetVC)
     self.view.addSubview(bottomSheetVC.view)
@@ -500,6 +519,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     let height = view.frame.height
     let width  = view.frame.width
     bottomSheetVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+    bottomSheetVC.mapController = self as MapViewController
   }
   
 }
