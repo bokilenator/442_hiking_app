@@ -10,7 +10,7 @@ import UIKit
 
 class ScrollableBottomSheetViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var tableView: UITableView!
+//    @IBOutlet weak var tableView: UITableView!
     let fullView: CGFloat = 100
     var mapController: MapViewController!
     var partialView: CGFloat {
@@ -20,10 +20,10 @@ class ScrollableBottomSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "DefaultTableViewCell", bundle: nil), forCellReuseIdentifier: "default")
-        
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.register(UINib(nibName: "DefaultTableViewCell", bundle: nil), forCellReuseIdentifier: "default")
+      
         
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(ScrollableBottomSheetViewController.panGesture))
         gesture.delegate = self
@@ -85,7 +85,7 @@ class ScrollableBottomSheetViewController: UIViewController {
                 
                 }, completion: { [weak self] _ in
                     if ( velocity.y < 0 ) {
-                        self?.tableView.isScrollEnabled = true
+//                        self?.tableView.isScrollEnabled = true
                     }
             })
         }
@@ -131,12 +131,12 @@ extension ScrollableBottomSheetViewController: UIGestureRecognizerDelegate {
         let direction = gesture.velocity(in: view).y
 
         let y = view.frame.minY
-        if (y == fullView && tableView.contentOffset.y == 0 && direction > 0) || (y == partialView) {
-            tableView.isScrollEnabled = false
-        } else {
-            tableView.isScrollEnabled = true
-        }
-        
+//        if (y == fullView && tableView.contentOffset.y == 0 && direction > 0) || (y == partialView) {
+//            tableView.isScrollEnabled = false
+//        } else {
+//            tableView.isScrollEnabled = true
+//        }
+      
         return false
     }
     
