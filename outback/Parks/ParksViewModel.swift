@@ -31,10 +31,13 @@ class ParksViewModel {
     let npsURL: NSURL = NSURL(string: "https://api.nps.gov/api/v1/parks?stateCode=\(search_state)&q=\(search_park)&api_key=\(api_key)&fields=fullName%2Cstates%2Curl%2CweatherInfo%2CoperatingHours%2CentranceFees%2Cimages")!
     
     // collect data from api
-    let data = NSData(contentsOf: npsURL as URL)!
+    let data = NSData(contentsOf: npsURL as URL)
+    if (data == nil) {
+      return
+    }
     
     do {
-      let swiftyjson = try JSON(data: data as Data)
+      let swiftyjson = try JSON(data: data as! Data)
       let total = swiftyjson["total"].int!
       for i in 0..<total {
         let entrance_fees = swiftyjson["data"][i]["entranceFees"] as JSON

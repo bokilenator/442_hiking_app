@@ -42,9 +42,12 @@ class TrailsViewModel {
     let search_sort = "quality"
     let npsURL: NSURL = NSURL(string: "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)")!
     let debugURL = "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)"
-    let data = NSData(contentsOf: npsURL as URL)!
+    let data = NSData(contentsOf: npsURL as URL)
+    if (data == nil) {
+      return
+    }
     do {
-      let swiftyjson = try JSON(data: data as Data)
+      let swiftyjson = try JSON(data: data as! Data)
       let total = swiftyjson["trails"].count
       for i in 0..<total {
         let name = swiftyjson["trails"][i]["name"].string ?? ""
