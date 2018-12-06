@@ -186,6 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				9EF6E24B218B3E8700482BE9 /* TableViewCell.swift */,
+				9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */,
+				9E8E179521B141CE0013DE34 /* ScrollableBottomSheetViewController.xib */,
 				9EF6E24C218B3E8700482BE9 /* TableViewCell.xib */,
 				9E8E179121B0E8750013DE34 /* DeletePointButton.swift */,
 			);
@@ -225,8 +227,6 @@
 			children = (
 				9E8E179A21B141CF0013DE34 /* DefaultTableViewCell.swift */,
 				9E8E179721B141CF0013DE34 /* DefaultTableViewCell.xib */,
-				9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */,
-				9E8E179521B141CE0013DE34 /* ScrollableBottomSheetViewController.xib */,
 				9EF6E24F218B3ECB00482BE9 /* MapViewController.swift */,
 				9EF0E5C721959D6D0021A47B /* MapViewModel.swift */,
 			);
@@ -355,6 +355,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-outback/Pods-outback-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework",
@@ -374,6 +375,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxCoreNavigation.framework",

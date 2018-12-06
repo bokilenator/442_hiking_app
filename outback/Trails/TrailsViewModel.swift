@@ -91,6 +91,14 @@ class TrailsViewModel {
 
   }
   
+  func pictureForRowAtIndexPath(_ indexPath: IndexPath) -> String {
+    guard indexPath.row >= 0 && indexPath.row < trails.count else {
+      return ""
+    }
+    return trails[indexPath.row].img
+    
+  }
+  
   func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> MapViewModel {
     let trail = trails[indexPath.row]
     return MapViewModel(trail: trail)

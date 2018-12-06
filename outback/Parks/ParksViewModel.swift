@@ -98,6 +98,14 @@ class ParksViewModel {
     
   }
   
+  func pictureForRowAtIndexPath(_ indexPath: IndexPath) -> String {
+    guard indexPath.row >= 0 && indexPath.row < parks.count else {
+      return ""
+    }
+    return parks[indexPath.row].image
+    
+  }
+  
   func detailViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> TrailsViewModel {
     let park = parks[indexPath.row]
     return TrailsViewModel(park: park)
