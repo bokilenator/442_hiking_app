@@ -20,6 +20,7 @@
 		9E645013218789A400302455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E645012218789A400302455 /* Assets.xcassets */; };
 		9E645016218789A400302455 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E645014218789A400302455 /* LaunchScreen.storyboard */; };
 		9E645021218789A400302455 /* outbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E645020218789A400302455 /* outbackTests.swift */; };
+		9E85B15C21B9505D004C4568 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E85B15B21B9505D004C4568 /* Connectivity.swift */; };
 		9E8E179221B0E8750013DE34 /* DeletePointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179121B0E8750013DE34 /* DeletePointButton.swift */; };
 		9E8E179B21B141CF0013DE34 /* ScrollableBottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8E179521B141CE0013DE34 /* ScrollableBottomSheetViewController.xib */; };
 		9E8E179C21B141CF0013DE34 /* ScrollableBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */; };
@@ -71,6 +72,7 @@
 		9E64501C218789A400302455 /* outbackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = outbackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E645020218789A400302455 /* outbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outbackTests.swift; sourceTree = "<group>"; };
 		9E645022218789A400302455 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E85B15B21B9505D004C4568 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		9E8E179121B0E8750013DE34 /* DeletePointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePointButton.swift; sourceTree = "<group>"; };
 		9E8E179521B141CE0013DE34 /* ScrollableBottomSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableBottomSheetViewController.xib; sourceTree = "<group>"; };
 		9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				9EF6E255218B429E00482BE9 /* Trail.swift */,
 				9EF6E25A218B959700482BE9 /* Park.swift */,
+				9E85B15B21B9505D004C4568 /* Connectivity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-outback/Pods-outback-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework",
@@ -369,7 +373,6 @@
 				"${BUILT_PRODUCTS_DIR}/MapboxSpeech/MapboxSpeech.framework",
 				"${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework",
 				"${BUILT_PRODUCTS_DIR}/Solar/Solar.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyButton/SwiftyButton.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Turf/Turf.framework",
 			);
@@ -377,6 +380,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxCoreNavigation.framework",
@@ -388,7 +392,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxSpeech.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Polyline.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Solar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Turf.framework",
 			);
@@ -450,6 +453,7 @@
 			files = (
 				9E28570B219094C700F6D109 /* ParksViewController.swift in Sources */,
 				9EF0E5C621959BCB0021A47B /* TrailDetailsViewController.swift in Sources */,
+				9E85B15C21B9505D004C4568 /* Connectivity.swift in Sources */,
 				9EF6E24D218B3E8700482BE9 /* TableViewCell.swift in Sources */,
 				9EF6E253218B3FE000482BE9 /* TrailsViewModel.swift in Sources */,
 				9EF6E256218B429E00482BE9 /* Trail.swift in Sources */,

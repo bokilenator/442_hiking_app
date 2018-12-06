@@ -70,12 +70,12 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: "toDetailVC", sender: indexPath)
+    performSegue(withIdentifier: "toMapVC", sender: indexPath)
   }
   
   // MARK: - Segues
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let detailVC = segue.destination as? TrailDetailsViewController,
+    if let detailVC = segue.destination as? MapViewController,
       let indexPath = sender as? IndexPath {
       detailVC.viewModel = viewModel.detailViewModelForRowAtIndexPath(indexPath)
     }

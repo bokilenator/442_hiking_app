@@ -67,7 +67,12 @@ class ScrollableBottomSheetViewController: UIViewController {
   }
   
   @IBAction func clearPressed(sender: UIButton) {
-    mapController.clear()
+    if Connectivity.isConnectedToInternet() {
+      print("Yes! internet is available.")
+      mapController.clear()
+    } else {
+      mapController.showAlert(message: "Cannot add/remove waypoints offline!")
+    }
   }
     
   @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {

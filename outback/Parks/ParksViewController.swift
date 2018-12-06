@@ -42,6 +42,11 @@ class ParksViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.tableView.reloadData()
       }
     }
+    
+//    let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.refresh, target: self, action: "someAction")
+//    let hamburger = UIImage(named: "deleteButton")!
+//    let button = UIBarButtonItem(image: hamburger, style: .plain, target: self, action: "someAction")
+//    navigationItem.rightBarButtonItem = button
   }
   
   override func viewWillAppear(_ animated: Bool) {
