@@ -82,6 +82,58 @@
             </objects>
             <point key="canvasLocation" x="-1073.913043478261" y="102.45535714285714"/>
         </scene>
+        <!--Filter Trail View Controller-->
+        <scene sceneID="v2G-CU-14m">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="gE8-iw-X8H" customClass="FilterTrailViewController" customModule="outback" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Lc-sr-wOl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k7p-Ik-f7a">
+                                <rect key="frame" x="67" y="83" width="240" height="499"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5f-pY-vpe">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.16547107699999999" green="0.17870476839999999" blue="0.2617601752" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fds-JJ-3pz">
+                                        <rect key="frame" x="8" y="37" width="224" height="168"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="565820196.30732703">
+                                            <!--2018-12-06 20:16:36 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F21-th-imR">
+                                        <rect key="frame" x="96" y="437" width="48" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" title="Search"/>
+                                        <connections>
+                                            <action selector="searchButton_TouchUpInside:" destination="gE8-iw-X8H" eventType="touchUpInside" id="SN9-H1-qOW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.48716806994818651" green="0.48716806994818651" blue="0.48716806994818651" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="sR0-QQ-PSo"/>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="Fds-JJ-3pz" id="Hwm-Mn-bTO"/>
+                        <outlet property="searchButton" destination="F21-th-imR" id="dTP-e8-A8U"/>
+                        <outlet property="titleLabel" destination="w5f-pY-vpe" id="YzA-Lg-M9T"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i3E-f7-KD2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2050.4000000000001" y="-672.41379310344837"/>
+        </scene>
         <!--Parks View Controller-->
         <scene sceneID="edS-Yc-wJJ">
             <objects>
@@ -91,7 +143,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dla-m4-N0k">
-                                <rect key="frame" x="47" y="44" width="281" height="623"/>
+                                <rect key="frame" x="47" y="149" width="281" height="518"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CeM-Cg-DGs">
@@ -125,12 +177,21 @@
                                     <outlet property="delegate" destination="bed-Q1-KAr" id="tW0-sI-jRJ"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJB-ce-FVM">
+                                <rect key="frame" x="170" y="78" width="35" height="30"/>
+                                <state key="normal" title="Filter"/>
+                                <connections>
+                                    <segue destination="gE8-iw-X8H" kind="presentation" id="msH-w6-O9i"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="dla-m4-N0k" firstAttribute="top" secondItem="dHV-dZ-lvC" secondAttribute="topMargin" constant="-20" id="gJc-kk-NCw"/>
+                            <constraint firstItem="cJB-ce-FVM" firstAttribute="top" secondItem="nHl-c1-vaf" secondAttribute="top" constant="14" id="Pm9-PX-GVO"/>
+                            <constraint firstItem="cJB-ce-FVM" firstAttribute="centerX" secondItem="nHl-c1-vaf" secondAttribute="centerX" id="TdH-Za-P3M"/>
                             <constraint firstItem="dla-m4-N0k" firstAttribute="bottom" secondItem="nHl-c1-vaf" secondAttribute="bottom" id="gYQ-z4-3IC"/>
                             <constraint firstItem="dla-m4-N0k" firstAttribute="leading" secondItem="nHl-c1-vaf" secondAttribute="leading" constant="47" id="hHz-av-d8S"/>
+                            <constraint firstItem="dla-m4-N0k" firstAttribute="top" secondItem="cJB-ce-FVM" secondAttribute="bottom" constant="41" id="slk-Ij-qvg"/>
                             <constraint firstItem="dla-m4-N0k" firstAttribute="centerX" secondItem="nHl-c1-vaf" secondAttribute="centerX" id="zDS-Ay-54t"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nHl-c1-vaf"/>
@@ -142,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hqb-Dd-vi3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2084.057971014493" y="102.45535714285714"/>
+            <point key="canvasLocation" x="-2085.5999999999999" y="102.09895052473765"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="LzO-kN-DAz">

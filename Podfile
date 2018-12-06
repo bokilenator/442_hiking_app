@@ -9,7 +9,7 @@ target 'outback' do
   pod 'SwiftyJSON'
   pod 'Alamofire'
   pod 'Kingfisher', '~> 4.0'
-
+  pod 'Eureka'
   pod 'Mapbox-iOS-SDK', '~> 4.4'
   pod 'MapboxNavigation', '~> 0.22.0'
   target 'outbackTests' do
