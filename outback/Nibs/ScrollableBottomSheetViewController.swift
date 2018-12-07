@@ -26,7 +26,7 @@ class ScrollableBottomSheetViewController: UIViewController {
   let fullView: CGFloat = 100
     var mapController: MapViewController!
     var partialView: CGFloat {
-        return UIScreen.main.bounds.height - 150
+        return UIScreen.main.bounds.height - 100
     }
 
   @IBAction func datePickerChanged(_ sender: UIDatePicker) {
@@ -34,7 +34,8 @@ class ScrollableBottomSheetViewController: UIViewController {
   }
   override func viewDidLoad() {
         super.viewDidLoad()
-        trailNameLabel.font = UIFont.systemFont(ofSize: 27)
+        trailNameLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        distanceLabel.font = UIFont.systemFont(ofSize: 15)
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //        tableView.register(UINib(nibName: "DefaultTableViewCell", bundle: nil), forCellReuseIdentifier: "default")

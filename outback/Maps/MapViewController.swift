@@ -130,7 +130,12 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
 //  Save button
   func save() {
+    guard destinationCoords.count > 0 else {
+      showAlert(message: "Must add waypoint to save")
+      return
+    }
     showAlert(message: "Saving map!")
+
     // Setup offline pack notification handlers.
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)

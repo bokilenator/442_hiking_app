@@ -135,5 +135,35 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
       detailVC.viewModel = viewModel.detailViewModelForRowAtIndexPath(indexPath)
     }
   }
+  
+  //delete plan action
+  
+  
+  func contextualDeleteAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
+    let action = UIContextualAction(style: .destructive, title: "Delete") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+      print("Deleting")
+      self.viewModel.remove(indexPath: indexPath, { [unowned self] in
+        DispatchQueue.main.async {
+          self.refresh()
+        }
+      })
+//      self.tableView.deleteRows(at: [indexPath], with: .left)
+      completionHandler(true)
+    }
+    
+    return action
+  }
+  
+ 
+  
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let deleteAction = self.contextualDeleteAction(forRowAtIndexPath: indexPath)
+    let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
+    return swipeConfig
+  }
+  
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    return .none
+  }
 
 }
