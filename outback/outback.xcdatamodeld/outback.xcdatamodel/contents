@@ -30,7 +30,7 @@
         <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="img" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="length" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -43,6 +43,6 @@
         <element name="Coordinate" positionX="-45" positionY="-9" width="128" height="88"/>
         <element name="ParkData" positionX="-472.859375" positionY="171.16015625" width="128" height="193"/>
         <element name="Plan" positionX="-399.30078125" positionY="-23.1953125" width="128" height="118"/>
-        <element name="TrailData" positionX="-198" positionY="36" width="128" height="240"/>
+        <element name="TrailData" positionX="-198" positionY="36" width="128" height="238"/>
     </elements>
 </model>

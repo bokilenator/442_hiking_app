@@ -1,8 +1,8 @@
 //
-//  TrailsViewController.swift
+//  HomeViewController.swift
 //  outback
 //
-//  Created by Karan Bokil on 11/1/18.
+//  Created by Karan Bokil on 12/7/18.
 //  Copyright © 2018 Karan Bokil. All rights reserved.
 //
 
@@ -11,39 +11,24 @@ import SwiftyJSON
 import UIKit
 import Kingfisher
 
-
-// MARK: - UISearch extension
-//extension RepositoriesViewController: UISearchResultsUpdating {
-//  func updateSearchResults(for searchController: UISearchController) {
-//    filterContentForSearchText(searchController.searchBar.text!)
-//  }
-//}
-
-
 // MARK: - Main View Controller
-class TrailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   // MARK: - Properties & Outlets
-  var viewModel = TrailsViewModel(park: nil)
-  let searchController = UISearchController(searchResultsController: nil)
+  var viewModel = HomeViewModel()
   let cellSpacingHeight: CGFloat = 15
   @IBOutlet var tableView: UITableView!
   
   // MARK: - viewDidLoad, WillAppear
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.title = "Outback"
     
-    if (viewModel.park == nil) {
-      self.title = "National Park"
-    } else {
-      self.title = viewModel.park?.full_name
-    }
-
     // register the nib
     let cellNib = UINib(nibName: "TableViewCell", bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: "cell")
     
-
+    
     viewModel.refresh { [unowned self] in
       DispatchQueue.main.async {
         self.tableView.reloadData()
@@ -109,22 +94,5 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
       detailVC.viewModel = viewModel.detailViewModelForRowAtIndexPath(indexPath)
     }
   }
-  
-  
-  // MARK: - Search Methods
-//  func setupSearchBar() {
-//    searchController.searchResultsUpdater = self
-//    searchController.dimsBackgroundDuringPresentation = false
-//    definesPresentationContext = true
-//    tableView.tableHeaderView = searchController.searchBar
-//    searchController.searchBar.barTintColor = UIColor(red:0.98, green:0.48, blue:0.24, alpha:1.0)
-//  }
-//
-//  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-//    viewModel.updateFiltering(searchText)
-//    tableView.reloadData()
-//  }
-//
+
 }
-
-

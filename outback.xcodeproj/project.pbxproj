@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F94EADB44AEA1B59A14AFD5 /* Pods_outbackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B89BB587D08987A0587652 /* Pods_outbackTests.framework */; };
+		9E03A34B21BA38990042D962 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E03A34A21BA38990042D962 /* HomeViewController.swift */; };
+		9E03A34D21BA38C30042D962 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E03A34C21BA38C30042D962 /* HomeViewModel.swift */; };
 		9E07504A219605D0003B47CC /* TrailDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */; };
 		9E07504C219605FA003B47CC /* ParksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07504B219605FA003B47CC /* ParksViewModelTests.swift */; };
 		9E07504E2196061A003B47CC /* TrailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07504D2196061A003B47CC /* TrailsViewModelTests.swift */; };
@@ -56,6 +58,8 @@
 		623731199901A639388E8A40 /* Pods_outback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_outback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A5292AAF198E59A2568D28 /* Pods-outbackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outbackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-outbackTests/Pods-outbackTests.release.xcconfig"; sourceTree = "<group>"; };
 		7890E0ED3F98C47BA9D2A0EF /* Pods-outback.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outback.release.xcconfig"; path = "Pods/Target Support Files/Pods-outback/Pods-outback.release.xcconfig"; sourceTree = "<group>"; };
+		9E03A34A21BA38990042D962 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9E03A34C21BA38C30042D962 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		9E07504B219605FA003B47CC /* ParksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksViewModelTests.swift; sourceTree = "<group>"; };
 		9E07504D2196061A003B47CC /* TrailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewModelTests.swift; sourceTree = "<group>"; };
@@ -134,6 +138,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9E03A34921BA38660042D962 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9E03A34A21BA38990042D962 /* HomeViewController.swift */,
+				9E03A34C21BA38C30042D962 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		9E644FFC218789A200302455 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +170,7 @@
 		9E645007218789A200302455 /* outback */ = {
 			isa = PBXGroup;
 			children = (
+				9E03A34921BA38660042D962 /* Home */,
 				9EF9AA1D21B9BBDE00BECF3B /* Filter */,
 				9E8E179021B0E8180013DE34 /* Nibs */,
 				9EF0E5C4219599F50021A47B /* Trail Details */,
@@ -477,6 +491,8 @@
 				9E645011218789A200302455 /* outback.xcdatamodeld in Sources */,
 				9E28570D219094FC00F6D109 /* ParksViewModel.swift in Sources */,
 				9E8E179221B0E8750013DE34 /* DeletePointButton.swift in Sources */,
+				9E03A34B21BA38990042D962 /* HomeViewController.swift in Sources */,
+				9E03A34D21BA38C30042D962 /* HomeViewModel.swift in Sources */,
 				9E645009218789A200302455 /* AppDelegate.swift in Sources */,
 				9EF0E5C821959D6D0021A47B /* MapViewModel.swift in Sources */,
 				9EF6E25B218B959700482BE9 /* Park.swift in Sources */,

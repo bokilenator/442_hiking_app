@@ -192,6 +192,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     parkdata.url = park?.url
     parkdata.weatherInfo = park?.weatherInfo
     parkdata.entrance_fees = park?.entrance_fees ?? false
+    parkdata.plan = plan
     
     let traildata = TrailData(context: context)
     let trail = viewModel?.trail
@@ -201,12 +202,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     traildata.rating = trail?.rating ?? 5.0
     traildata.url = trail?.url
     traildata.img = trail?.img
-    traildata.length = Int16(trail?.length as! Int)
+    traildata.length = Int64(trail?.length as! Int)
     traildata.longitude = trail?.longitude ?? 0.0
     traildata.latitude = trail?.latitude ?? 0.0
     traildata.condition = trail?.condition
     traildata.condition_details = trail?.condition_details
     traildata.state = trail?.state
+    traildata.plan = plan
+    
+    plan.parkdata = parkdata
+    plan.traildata = traildata
     
     
 

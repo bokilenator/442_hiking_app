@@ -12,9 +12,7 @@ import Eureka
 class FilterTrailViewController: FormViewController {
 
   let viewModel = ParksViewModel()
-  @IBOutlet weak var searchButton: UIButton!
-  @IBOutlet weak var datePicker: UIDatePicker!
-  @IBOutlet weak var titleLabel: UILabel!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.title = "Filter Trails"
