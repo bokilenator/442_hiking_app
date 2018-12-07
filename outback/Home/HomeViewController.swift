@@ -42,6 +42,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
 
 
+    //hamburger!
+    let button =  UIButton(type: .custom)
+    button.setImage(UIImage(named: "hamburger"), for: .normal)
+    button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+    button.imageView?.contentMode = .scaleAspectFit
+//
+    button.imageEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 1, right: (-1 * self.view.frame.width + 32))//move image to the right
+//
+    let barButton = UIBarButtonItem(customView: button)
+    self.navigationItem.rightBarButtonItem = barButton
+    navigationController?.isNavigationBarHidden = false
+
     
     // Self-sizing magic!
     tableView.delegate = self
@@ -71,6 +84,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
   @objc private func refresh(_ sender: Any) {
     // Fetch Weather Data
     refresh()
+  }
+  
+  @objc func buttonAction() {
+    performSegue(withIdentifier: "toSideBar", sender: self)
   }
   
   // MARK: - Table View

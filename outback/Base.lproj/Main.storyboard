@@ -210,12 +210,11 @@
                     <navigationItem key="navigationItem" id="iDF-BF-kCT">
                         <barButtonItem key="rightBarButtonItem" title="Menu" id="lHh-Kf-Ffc">
                             <connections>
-                                <segue destination="e7c-fD-llf" kind="presentation" id="HUf-LO-1z4"/>
+                                <segue destination="e7c-fD-llf" kind="presentation" identifier="toSideBar" id="HUf-LO-1z4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="menuButton" destination="lHh-Kf-Ffc" id="n9p-rU-lqp"/>
                         <outlet property="tableView" destination="vIC-kq-3x5" id="cDT-Gp-2ID"/>
                     </connections>
                 </viewController>
