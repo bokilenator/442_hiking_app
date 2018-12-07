@@ -10,8 +10,8 @@ import Foundation
 import SwiftyJSON
 
 struct Park {
-  let entrance_fees: JSON
-  let operating_hours: JSON
+  let entrance_fees: Bool
+//  let operating_hours: JSON
   let full_name: String
   let states: String
   let latitude:String

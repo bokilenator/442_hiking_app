@@ -12,9 +12,13 @@ import SwiftyJSON
 class TrailsViewModel {
   
   var park:Park? = nil
+  var rating:Int = 0
+  var distance:Int = 0
   
-  init(park: Park?) {
+  init(park: Park?, rating: Int = 0, distance: Int = 0) {
     self.park = park
+    self.rating = rating
+    self.distance = distance
   }
   
   var trails = [Trail]()
@@ -40,7 +44,7 @@ class TrailsViewModel {
     let search_distance = "200"
     let search_rating = "0"
     let search_sort = "quality"
-    let npsURL: NSURL = NSURL(string: "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)")!
+    let npsURL: NSURL = NSURL(string: "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&minLength=\(distance)&minStars=\(rating)&sort=\(search_sort)&key=\(api_key)")!
     let debugURL = "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)"
     let data = NSData(contentsOf: npsURL as URL)
     if (data == nil) {

@@ -26,6 +26,7 @@
 		9E8E179C21B141CF0013DE34 /* ScrollableBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */; };
 		9E8E179D21B141CF0013DE34 /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8E179721B141CF0013DE34 /* DefaultTableViewCell.xib */; };
 		9E8E17A021B141CF0013DE34 /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E179A21B141CF0013DE34 /* DefaultTableViewCell.swift */; };
+		9EB7397921B9C4D6009383E0 /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7397821B9C4D6009383E0 /* States.swift */; };
 		9EF0E5C621959BCB0021A47B /* TrailDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF0E5C521959BCB0021A47B /* TrailDetailsViewController.swift */; };
 		9EF0E5C821959D6D0021A47B /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF0E5C721959D6D0021A47B /* MapViewModel.swift */; };
 		9EF6E249218B3CDB00482BE9 /* TrailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */; };
@@ -77,6 +78,7 @@
 		9E8E179621B141CF0013DE34 /* ScrollableBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableBottomSheetViewController.swift; sourceTree = "<group>"; };
 		9E8E179721B141CF0013DE34 /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		9E8E179A21B141CF0013DE34 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
+		9EB7397821B9C4D6009383E0 /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
 		9EF0E5C521959BCB0021A47B /* TrailDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailsViewController.swift; sourceTree = "<group>"; };
 		9EF0E5C721959D6D0021A47B /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		9EF6E248218B3CDB00482BE9 /* TrailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				9EF9AA2421B9BD5400BECF3B /* FilterTrailViewController.swift */,
+				9EB7397821B9C4D6009383E0 /* States.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				9E8E179C21B141CF0013DE34 /* ScrollableBottomSheetViewController.swift in Sources */,
 				9EF9AA2521B9BD5400BECF3B /* FilterTrailViewController.swift in Sources */,
 				9EF6E259218B49B200482BE9 /* TrailDetailsViewModel.swift in Sources */,
+				9EB7397921B9C4D6009383E0 /* States.swift in Sources */,
 				9E8E17A021B141CF0013DE34 /* DefaultTableViewCell.swift in Sources */,
 				9EF6E250218B3ECB00482BE9 /* MapViewController.swift in Sources */,
 				9E645011218789A200302455 /* outback.xcdatamodeld in Sources */,

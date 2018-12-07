@@ -75,7 +75,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="k4j-cY-1ja"/>
                     <connections>
-                        <outlet property="tableView" destination="vuu-8D-Ryi" id="oiZ-nI-MAA"/>
+                        <outlet property="tableView" destination="vuu-8D-Ryi" id="IYj-Ti-IfZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kq8-RV-Yma" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,45 +89,11 @@
                     <view key="view" contentMode="scaleToFill" id="0Lc-sr-wOl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k7p-Ik-f7a">
-                                <rect key="frame" x="67" y="83" width="240" height="499"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5f-pY-vpe">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.16547107699999999" green="0.17870476839999999" blue="0.2617601752" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fds-JJ-3pz">
-                                        <rect key="frame" x="8" y="37" width="224" height="168"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="565820196.30732703">
-                                            <!--2018-12-06 20:16:36 +0000-->
-                                        </date>
-                                    </datePicker>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F21-th-imR">
-                                        <rect key="frame" x="96" y="437" width="48" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <state key="normal" title="Search"/>
-                                        <connections>
-                                            <action selector="searchButton_TouchUpInside:" destination="gE8-iw-X8H" eventType="touchUpInside" id="SN9-H1-qOW"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="0.48716806994818651" green="0.48716806994818651" blue="0.48716806994818651" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="sR0-QQ-PSo"/>
                     </view>
                     <connections>
-                        <outlet property="datePicker" destination="Fds-JJ-3pz" id="Hwm-Mn-bTO"/>
-                        <outlet property="searchButton" destination="F21-th-imR" id="dTP-e8-A8U"/>
-                        <outlet property="titleLabel" destination="w5f-pY-vpe" id="YzA-Lg-M9T"/>
+                        <segue destination="ZZa-Mr-tDW" kind="show" identifier="toTrailsVC" id="LXc-kP-2tP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i3E-f7-KD2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -181,7 +147,7 @@
                                 <rect key="frame" x="170" y="78" width="35" height="30"/>
                                 <state key="normal" title="Filter"/>
                                 <connections>
-                                    <segue destination="gE8-iw-X8H" kind="presentation" id="msH-w6-O9i"/>
+                                    <segue destination="gE8-iw-X8H" kind="show" id="ZME-1i-aYw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -221,4 +187,7 @@
             <point key="canvasLocation" x="164" y="102"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="LXc-kP-2tP"/>
+    </inferredMetricsTieBreakers>
 </document>

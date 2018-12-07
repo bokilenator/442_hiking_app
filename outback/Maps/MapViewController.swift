@@ -191,6 +191,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     parkdata.states = park?.states
     parkdata.url = park?.url
     parkdata.weatherInfo = park?.weatherInfo
+    parkdata.entrance_fees = park?.entrance_fees ?? false
     
     let traildata = TrailData(context: context)
     let trail = viewModel?.trail

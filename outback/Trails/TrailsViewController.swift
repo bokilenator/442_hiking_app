@@ -42,6 +42,7 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
     // register the nib
     let cellNib = UINib(nibName: "TableViewCell", bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: "cell")
+    
     // set up the search bar (method below)
 //    setupSearchBar()
     // get the data for the table
