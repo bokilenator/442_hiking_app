@@ -34,6 +34,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   var progressView: UIProgressView!
   var routePolyLine: MGLPolyline!
   var destinationCoords: [CLLocationCoordinate2D]!
+  var date: Date = Date()
   
   var startCoordinate = CLLocationCoordinate2D(latitude: 37.734328, longitude: -119.601744)
   
@@ -80,7 +81,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     mapView.addGestureRecognizer(longPress)
     
     // Let user know how to add waypoints
-    showAlert(message: "Hi there! Add up to 10 waypoints to your hike by long clicking any area or point of interest!")
+//    showAlert(message: "Hi there! Add up to 10 waypoints to your hike by long clicking any area or point of interest!")
     
     //Load Core Data
     clearPolyLine()
@@ -94,6 +95,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         if let plan:Plan = data as? Plan {
           if (plan.trail_name == viewModel?.title()) {
             print(plan.trail_name)
+            date = plan.date ?? Date()
             //Add route
             if let route:MGLPolyline = plan.route as? MGLPolyline {
               routePolyLine = route
@@ -166,6 +168,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     let plan = Plan(context: context)
     plan.trail_name = viewModel!.title()
     plan.route = routePolyLine
+    plan.date = date
     
     if (destinationCoords == nil) {
       return

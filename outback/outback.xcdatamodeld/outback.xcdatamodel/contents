@@ -18,6 +18,7 @@
         <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="parkdata" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <entity name="Plan" representedClassName="Plan" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="route" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="trail_name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="coordinates" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Coordinate" inverseName="plan" inverseEntity="Coordinate" syncable="YES"/>
@@ -42,7 +43,7 @@
     <elements>
         <element name="Coordinate" positionX="-45" positionY="-9" width="128" height="88"/>
         <element name="ParkData" positionX="-472.859375" positionY="171.16015625" width="128" height="193"/>
-        <element name="Plan" positionX="-399.30078125" positionY="-23.1953125" width="128" height="118"/>
+        <element name="Plan" positionX="-399.30078125" positionY="-23.1953125" width="128" height="135"/>
         <element name="TrailData" positionX="-198" positionY="36" width="128" height="238"/>
     </elements>
 </model>
