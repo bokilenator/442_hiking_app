@@ -295,6 +295,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="wNa-Cw-gm8" kind="show" id="z3A-DA-u7q"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -310,8 +313,65 @@
             </objects>
             <point key="canvasLocation" x="-3110" y="-921"/>
         </scene>
+        <!--Nearby View Controller-->
+        <scene sceneID="ten-5w-KsG">
+            <objects>
+                <viewController id="wNa-Cw-gm8" customClass="NearbyViewController" customModule="outback" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Gf-oe-yMk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fd0-ej-NvA">
+                                <rect key="frame" x="47" y="64" width="281" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0p6-ym-NQh">
+                                        <rect key="frame" x="0.0" y="28" width="281" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0p6-ym-NQh" id="DeR-qj-rBK">
+                                            <rect key="frame" x="0.0" y="0.0" width="281" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yosemite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdI-iY-mBz">
+                                                    <rect key="frame" x="15" y="12" width="71" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Vmd-gZ-HN3" kind="show" identifier="toMapVC" id="yGE-7J-FOI"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wNa-Cw-gm8" id="TSZ-Kr-YXd"/>
+                                    <outlet property="delegate" destination="wNa-Cw-gm8" id="OBl-S5-8Wi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fd0-ej-NvA" firstAttribute="centerX" secondItem="MPw-UI-ytT" secondAttribute="centerX" id="2vC-0c-QFt"/>
+                            <constraint firstItem="fd0-ej-NvA" firstAttribute="top" secondItem="MPw-UI-ytT" secondAttribute="top" id="UlY-zF-glw"/>
+                            <constraint firstItem="MPw-UI-ytT" firstAttribute="bottom" secondItem="fd0-ej-NvA" secondAttribute="bottom" id="YNZ-n7-iTd"/>
+                            <constraint firstItem="fd0-ej-NvA" firstAttribute="leading" secondItem="MPw-UI-ytT" secondAttribute="leading" constant="47" id="k0m-X8-IIr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MPw-UI-ytT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oBx-wd-XF9"/>
+                    <connections>
+                        <outlet property="tableView" destination="fd0-ej-NvA" id="v30-DX-zKt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mvg-Of-v0f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-431" y="-672"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Web-mh-fhr"/>
+        <segue reference="yGE-7J-FOI"/>
     </inferredMetricsTieBreakers>
 </document>

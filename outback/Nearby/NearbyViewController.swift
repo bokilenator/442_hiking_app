@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  NearbyViewController.swift
 //  outback
 //
 //  Created by Karan Bokil on 12/7/18.
@@ -10,25 +10,39 @@ import Foundation
 import SwiftyJSON
 import UIKit
 import Kingfisher
-import CoreGraphics
+import MapKit
+import CoreLocation
 
 // MARK: - Main View Controller
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NearbyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
   
   // MARK: - Properties & Outlets
-  var viewModel = HomeViewModel()
-  let cellSpacingHeight: CGFloat = 15
-  @IBOutlet var tableView: UITableView!
+  var viewModel = NearbyViewModel()
+  let locationManager = CLLocationManager()
   private let refreshControl = UIRefreshControl()
 
+  @IBOutlet var tableView: UITableView!
+  
   // MARK: - viewDidLoad, WillAppear
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.title = "Outback"
+    
+    self.title = "Nearby trails"
     
     // register the nib
     let cellNib = UINib(nibName: "TableViewCell", bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: "cell")
+    // Ask for Authorisation from the User.
+    self.locationManager.requestAlwaysAuthorization()
+    
+    // For use in foreground
+    self.locationManager.requestWhenInUseAuthorization()
+    
+    if CLLocationManager.locationServicesEnabled() {
+      locationManager.delegate = self
+      locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+      locationManager.startUpdatingLocation()
+    }
     
     //pull to refresh
     refresh()
@@ -40,21 +54,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
     refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
-
-
-    //hamburger!
-    let button =  UIButton(type: .custom)
-    button.setImage(UIImage(named: "hamburger"), for: .normal)
-    button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-    button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-    button.imageView?.contentMode = .scaleAspectFit
-//
-    button.imageEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 1, right: (-1 * self.view.frame.width + 32))//move image to the right
-//
-    let barButton = UIBarButtonItem(customView: button)
-    self.navigationItem.rightBarButtonItem = barButton
-    navigationController?.isNavigationBarHidden = false
-
     
     // Self-sizing magic!
     tableView.delegate = self
@@ -70,13 +69,25 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
   }
   
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+    viewModel.search_lat = String(locValue.latitude)
+    viewModel.search_long = String(locValue.longitude)
+    viewModel.refresh { [unowned self] in
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+      }
+    }
+    print("locations = \(locValue.latitude) \(locValue.longitude)")
+  }
   
+  //refresh
   func refresh(){
     viewModel.refresh { [unowned self] in
       DispatchQueue.main.async {
         self.tableView.reloadData()
         self.refreshControl.endRefreshing()
-//        self.activityIndicatorView.stopAnimating()
+        //        self.activityIndicatorView.stopAnimating()
       }
     }
   }
@@ -84,10 +95,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
   @objc private func refresh(_ sender: Any) {
     // Fetch Weather Data
     refresh()
-  }
-  
-  @objc func buttonAction() {
-    performSegue(withIdentifier: "toSideBar", sender: self)
   }
   
   // MARK: - Table View
@@ -107,14 +114,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     cell.layer.borderWidth = 1
     cell.layer.cornerRadius = 4
     cell.clipsToBounds = true
-
+    
     
     return cell
-  }
-  
-  // Set the spacing between sections
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return cellSpacingHeight
   }
   
   // Make the background color show through
@@ -137,3 +139,5 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
   }
 
 }
+
+
