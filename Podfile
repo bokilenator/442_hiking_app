@@ -7,7 +7,6 @@ target 'outback' do
 
   # Pods for outback
   pod 'SwiftyJSON'
-  pod 'RatingRow'
   pod 'Alamofire'
   pod 'Kingfisher', '~> 4.0'
   pod 'Eureka'

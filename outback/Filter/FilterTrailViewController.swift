@@ -114,13 +114,34 @@ class FilterTrailViewController: FormViewController {
         $0.value = 0
       }
 
-      <<< IntRow() {
-        $0.tag = "ratingTag"
-        $0.title = "Minimum Rating" //min 0 max 4
+//      <<< IntRow() {
+//        $0.tag = "ratingTag"
+//        $0.title = "Minimum Rating" //min 0 max 4
+//        $0.add(rule: RuleGreaterOrEqualThan(min: 0))
+//        $0.add(rule: RuleSmallerOrEqualThan(max: 4))
+//        $0.value = 0
+//      }
+      <<< StepperRow() {
+        $0.title = "Minimum Rating"
+        $0.value = 0
         $0.add(rule: RuleGreaterOrEqualThan(min: 0))
         $0.add(rule: RuleSmallerOrEqualThan(max: 4))
-        $0.value = 0
-      }
+        $0.tag = "ratingTag"
+        }.cellSetup({ (cell, row) in
+          cell.stepper.minimumValue = 0
+          cell.stepper.maximumValue = 4
+          cell.valueLabel?.text = "\(Int(row.value!))"
+          }).cellUpdate({ (cell, row) in
+          if(row.value != nil)
+          {
+            cell.valueLabel?.text = "\(Int(row.value!))"
+          }
+          }).onChange({ (row) in
+          if(row.value != nil)
+          {
+            row.cell.valueLabel?.text = "\(Int(row.value!))"
+          }
+          })
     
       +++ Section()
       <<< ButtonRow() {
@@ -142,7 +163,7 @@ class FilterTrailViewController: FormViewController {
       let parkName: String = self.form.rowBy(tag: "parkTag")!.value!
       let park = self.viewModel.parks.first(where: {$0.full_name == parkName})
       let distance = self.form.rowBy(tag: "distanceTag")?.baseValue as! Int
-      let rating = self.form.rowBy(tag: "ratingTag")?.baseValue as! Int
+      let rating = Int(self.form.rowBy(tag: "ratingTag")?.baseValue as! Double)
 
       print(park?.full_name)
       destinationVC.viewModel = TrailsViewModel(park: park, rating: rating, distance: distance)
