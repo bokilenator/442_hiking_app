@@ -21,16 +21,21 @@ class ScrollableBottomSheetViewController: UIViewController {
   @IBOutlet weak var entranceFeeLabel: UILabel!
   @IBOutlet weak var summaryLabel: UILabel!
   
+  @IBOutlet weak var datePicker: UIDatePicker!
   
   let fullView: CGFloat = 100
     var mapController: MapViewController!
     var partialView: CGFloat {
-        return UIScreen.main.bounds.height - 150
+        return UIScreen.main.bounds.height - 100
     }
 
-    override func viewDidLoad() {
+  @IBAction func datePickerChanged(_ sender: UIDatePicker) {
+    mapController.date = sender.date
+  }
+  override func viewDidLoad() {
         super.viewDidLoad()
-        trailNameLabel.font = UIFont.systemFont(ofSize: 27)
+        trailNameLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        distanceLabel.font = UIFont.systemFont(ofSize: 15)
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //        tableView.register(UINib(nibName: "DefaultTableViewCell", bundle: nil), forCellReuseIdentifier: "default")
@@ -52,6 +57,10 @@ class ScrollableBottomSheetViewController: UIViewController {
             let yComponent = self?.partialView
             self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
             })
+      datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+      datePicker.setValue(false, forKey: "highlightsToday")
+      datePicker.setDate(mapController.date, animated: true)
+      
       trailNameLabel.text = mapController.viewModel?.title()
       distanceLabel.text = String(mapController.viewModel!.trail.length) + " mi"
       stateLabel.text = "STATE: " + (mapController.viewModel?.trail.state)!

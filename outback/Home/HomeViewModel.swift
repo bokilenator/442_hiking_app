@@ -30,7 +30,8 @@ class HomeViewModel {
       for data in result as! [NSManagedObject] {
         if let plan:Plan = data as? Plan {
           let park:Park = Park(entrance_fees: plan.parkdata?.entrance_fees ?? true, full_name: plan.parkdata?.full_name ?? "Park", states: plan.parkdata?.states ?? "CA", latitude: plan.parkdata?.latitude ?? "0.0", longitude: plan.parkdata?.longitude ?? "0.0", url: plan.parkdata?.url ?? "", weatherInfo: plan.parkdata?.weatherInfo ?? "Warm", image: plan.parkdata?.image ?? "", description: plan.parkdata?.description ?? "A cool park")
-
+          print(park.full_name)
+          print(plan.traildata?.summary)
           let trail:Trail = Trail(name: (plan.traildata?.name!)!, summary: (plan.traildata?.summary!)!, difficulty: (plan.traildata?.difficulty!)!, rating: (plan.traildata?.rating)!, url: (plan.traildata?.url!)!, img: (plan.traildata?.img!)!, length: Int(plan.traildata?.length as! Int64), longitude: (plan.traildata?.longitude)!, latitude: (plan.traildata?.latitude)!, condition: (plan.traildata?.condition!)!, condition_details: (plan.traildata?.condition_details!)!, park: park, state: plan.traildata?.state!)
 
           trails.append(trail)
@@ -60,6 +61,42 @@ class HomeViewModel {
       return ""
     }
     return "\(trails[indexPath.row].length) mi" + String(repeating: " ", count: (3 - String(trails[indexPath.row].length).count)) + "\t \t \t" + String(repeating: "⭐", count: Int(trails[indexPath.row].rating))
+    
+  }
+  
+  func remove(indexPath: IndexPath, _ completion: @escaping () -> Void) {
+    guard indexPath.row >= 0 && indexPath.row < trails.count else {
+      return
+    }
+    //find the correct plan in core data
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Plan")
+    request.returnsObjectsAsFaults = false
+    
+    do {
+      let result = try context.fetch(request)
+      for data in result as! [NSManagedObject] {
+        if let plan:Plan = data as? Plan {
+          if (plan.trail_name == trails[indexPath.row].name) {
+            context.delete(plan)
+          }
+
+        }
+      }
+    } catch let error as NSError {
+      print(error)
+    }
+    
+    do {
+      try context.save()
+    } catch {
+      print("Failed saving")
+    }
+    //delete the plan
+    completion()
+
+    //refresh the page
     
   }
   
