@@ -1,49 +1,39 @@
 //
-//  TrailsViewModel.swift
+//  NearbyViewModel.swift
 //  outback
 //
-//  Created by Karan Bokil on 11/1/18.
+//  Created by Karan Bokil on 12/7/18.
 //  Copyright © 2018 Karan Bokil. All rights reserved.
 //
-
 import Foundation
 import SwiftyJSON
 
-class TrailsViewModel {
+class NearbyViewModel {
   
   var park:Park? = nil
-  var rating:Int = 0
-  var distance:Int = 0
-  
-  init(park: Park?, rating: Int = 0, distance: Int = 0) {
-    self.park = park
-    self.rating = rating
-    self.distance = distance
+  var search_lat = "-83.093"
+  var search_long = "42.376"
+  init() {
+
   }
   
   var trails = [Trail]()
-//  var filteredRepos = [Repository]()
-  
-//  let client = SearchRepositoriesClient()
-//  let parser = RepositoriesParser()
-  
+
   func refresh(_ completion: @escaping () -> Void) {
-//    client.fetchRepositories { [unowned self] data in
-//      if let repositories = self.parser.repositoriesFromSearchResponse(data) {
-//        self.repos = repositories
-//      }
+    trails = []
     let api_key = "200375104-0392bc18905efe70f4e0062b073c01fe"
-    var search_lat = "37.84883288"
-    var search_long = "-119.5571873"
+
+    park = Park(entrance_fees: false, full_name: "Near You", states: "N/A", latitude: search_lat, longitude: search_long, url: "Not available", weatherInfo: "Not available", image: "N/A", description: "Near You")
     
     if (self.park != nil) {
       search_lat = park?.latitude as! String
       search_long = park?.longitude as! String
     }
     
-    let search_distance = "200"
+    let search_distance = "50"
+    let search_rating = "0"
     let search_sort = "quality"
-    let npsURL: NSURL = NSURL(string: "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minLength=\(distance)&minStars=\(rating)&sort=\(search_sort)&key=\(api_key)")!
+    let npsURL: NSURL = NSURL(string: "https://www.hikingproject.com/data/get-trails?lat=\(search_lat)&lon=\(search_long)&maxDistance=\(search_distance)&minStars=\(search_rating)&sort=\(search_sort)&key=\(api_key)")!
     let data = NSData(contentsOf: npsURL as URL)
     if (data == nil) {
       return
@@ -90,7 +80,7 @@ class TrailsViewModel {
       return ""
     }
     return "\(trails[indexPath.row].length) mi" + String(repeating: " ", count: (3 - String(trails[indexPath.row].length).count)) + "\t \t \t" + String(repeating: "⭐", count: Int(trails[indexPath.row].rating))
-
+    
   }
   
   func pictureForRowAtIndexPath(_ indexPath: IndexPath) -> String {
@@ -106,9 +96,9 @@ class TrailsViewModel {
     return MapViewModel(trail: trail)
   }
   
-//  func updateFiltering(_ searchText: String) -> Void {
-//    filteredRepos = self.repos.filter { repo in
-//      return repo.name.lowercased().contains(searchText.lowercased())
-//    }
-//  }
+  //  func updateFiltering(_ searchText: String) -> Void {
+  //    filteredRepos = self.repos.filter { repo in
+  //      return repo.name.lowercased().contains(searchText.lowercased())
+  //    }
+  //  }
 }

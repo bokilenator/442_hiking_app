@@ -191,6 +191,8 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     parkdata.states = park?.states
     parkdata.url = park?.url
     parkdata.weatherInfo = park?.weatherInfo
+    parkdata.entrance_fees = park?.entrance_fees ?? false
+    parkdata.plan = plan
     
     let traildata = TrailData(context: context)
     let trail = viewModel?.trail
@@ -200,12 +202,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     traildata.rating = trail?.rating ?? 5.0
     traildata.url = trail?.url
     traildata.img = trail?.img
-    traildata.length = Int16(trail?.length as! Int)
+    traildata.length = Int64(trail?.length as! Int)
     traildata.longitude = trail?.longitude ?? 0.0
     traildata.latitude = trail?.latitude ?? 0.0
     traildata.condition = trail?.condition
     traildata.condition_details = trail?.condition_details
     traildata.state = trail?.state
+    traildata.plan = plan
+    
+    plan.parkdata = parkdata
+    plan.traildata = traildata
     
     
 
@@ -235,14 +241,20 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     let annotation = MGLPointAnnotation()
     annotation.coordinate = coordinate
     annotation.title = "Remove Waypoint"
-    mapView.addAnnotation(annotation)
-    
-    
-    calculateOptimizedRoute(from: startCoordinate, to: annotation.coordinate) { (route, error) in
-      if error != nil {
-        print("Error calculating route")
+    if Connectivity.isConnectedToInternet() {
+      print("Yes! internet is available.")
+      mapView.addAnnotation(annotation)
+      
+      
+      calculateOptimizedRoute(from: startCoordinate, to: annotation.coordinate) { (route, error) in
+        if error != nil {
+          print("Error calculating route")
+        }
       }
+    } else {
+      showAlert(message: "Cannot add/remove waypoints offline!")
     }
+    
   }
   // Retrieve optimization api data
   func calculateOptimizedRoute(from origin: CLLocationCoordinate2D,
@@ -252,7 +264,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
       destinationCoords = []
     }
     destinationCoords.append(destination)
-    clearPolyLine()
     //Mapbox geojson uses long, lat!
     let accessToken = "sk.eyJ1Ijoia2Jva2lsIiwiYSI6ImNqbXhteHZmeTBjangzcWxydHRjbHc2MXAifQ.y5ybeyL8pcy0L2Z9aPTSSg"
     let originString = "\(origin.longitude),\(origin.latitude);"
@@ -262,21 +273,24 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     let url:String = "https://api.mapbox.com/optimized-trips/v1/mapbox/walking/" + originString + destinationString + midPointString + "?distributions=" + distributionString + "&overview=full&steps=true&geometries=geojson&source=first&access_token=" + accessToken
     let optURL: NSURL = NSURL(string: url)!
-    let data = NSData(contentsOf: optURL as URL)!
-    
-    do {
-      let swiftyjson = try JSON(data: data as Data)
-      let coords = swiftyjson["trips"][0]["geometry"]["coordinates"].array
-      var coordinates:[CLLocationCoordinate2D] = []
-      for coord in coords ?? [] {
-        let c = coord.arrayValue
-        coordinates.append(CLLocationCoordinate2D(latitude: c[1].doubleValue, longitude: c[0].doubleValue))
+    if let data = NSData(contentsOf: optURL as URL) {
+      do {
+        clearPolyLine()
+        let swiftyjson = try JSON(data: data as Data)
+        let coords = swiftyjson["trips"][0]["geometry"]["coordinates"].array
+        var coordinates:[CLLocationCoordinate2D] = []
+        for coord in coords ?? [] {
+          let c = coord.arrayValue
+          coordinates.append(CLLocationCoordinate2D(latitude: c[1].doubleValue, longitude: c[0].doubleValue))
+        }
+        print(coordinates)
+        routePolyLine = MGLPolyline(coordinates: &coordinates, count: UInt(coordinates.count))
+        mapView.addAnnotation(routePolyLine)
+      } catch let error as NSError {
+        print(error)
       }
-      print(coordinates)
-      routePolyLine = MGLPolyline(coordinates: &coordinates, count: UInt(coordinates.count))
-      mapView.addAnnotation(routePolyLine)
-    } catch let error as NSError {
-      print(error)
+    } else {
+      showAlert(message: "Cannot add/remove waypoints offline!")
     }
     
   }
@@ -285,7 +299,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     if (destinationCoords == nil) {
       destinationCoords = []
     }
-    clearPolyLine()
     //Mapbox geojson uses long, lat!
     let accessToken = "sk.eyJ1Ijoia2Jva2lsIiwiYSI6ImNqbXhteHZmeTBjangzcWxydHRjbHc2MXAifQ.y5ybeyL8pcy0L2Z9aPTSSg"
     let originString = "\(startCoordinate.longitude),\(startCoordinate.latitude);"
@@ -295,22 +308,27 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     let url:String = "https://api.mapbox.com/optimized-trips/v1/mapbox/walking/" + originString + destinationString + midPointString + "?distributions=" + distributionString + "&overview=full&steps=true&geometries=geojson&source=first&access_token=" + accessToken
     let optURL: NSURL = NSURL(string: url)!
-    let data = NSData(contentsOf: optURL as URL)!
-    
-    do {
-      let swiftyjson = try JSON(data: data as Data)
-      let coords = swiftyjson["trips"][0]["geometry"]["coordinates"].array
-      var coordinates:[CLLocationCoordinate2D] = []
-      for coord in coords ?? [] {
-        let c = coord.arrayValue
-        coordinates.append(CLLocationCoordinate2D(latitude: c[1].doubleValue, longitude: c[0].doubleValue))
+    if let data = NSData(contentsOf: optURL as URL) {
+      do {
+        clearPolyLine()
+        let swiftyjson = try JSON(data: data as Data)
+        let coords = swiftyjson["trips"][0]["geometry"]["coordinates"].array
+        var coordinates:[CLLocationCoordinate2D] = []
+        for coord in coords ?? [] {
+          let c = coord.arrayValue
+          coordinates.append(CLLocationCoordinate2D(latitude: c[1].doubleValue, longitude: c[0].doubleValue))
+        }
+        print(coordinates)
+        routePolyLine = MGLPolyline(coordinates: &coordinates, count: UInt(coordinates.count))
+        mapView.addAnnotation(routePolyLine)
+      } catch let error as NSError {
+        print(error)
       }
-      print(coordinates)
-      routePolyLine = MGLPolyline(coordinates: &coordinates, count: UInt(coordinates.count))
-      mapView.addAnnotation(routePolyLine)
-    } catch let error as NSError {
-      print(error)
+    } else {
+      showAlert(message: "Cannot add/remove waypoints offline!")
     }
+    
+    
     
   }
   
@@ -378,17 +396,22 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
   
   func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
     // Hide the callout view.
-    
-    if let index = destinationCoords.index(of:annotation.coordinate) {
-      destinationCoords.remove(at: index)
-      if (destinationCoords.count < 1) {
-        clearPolyLine()
-      } else {
-        calculateOptimizedRoute()
-
+    if Connectivity.isConnectedToInternet() {
+      print("Yes! internet is available.")
+      if let index = destinationCoords.index(of:annotation.coordinate) {
+        destinationCoords.remove(at: index)
+        if (destinationCoords.count < 1) {
+          clearPolyLine()
+        } else {
+          calculateOptimizedRoute()
+          
+        }
       }
+      mapView.removeAnnotation(annotation)
+    } else {
+      showAlert(message: "Cannot add/remove waypoints offline!")
     }
-    mapView.removeAnnotation(annotation)
+
     
   }
   

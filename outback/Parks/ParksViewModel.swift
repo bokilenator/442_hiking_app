@@ -11,6 +11,8 @@ import SwiftyJSON
 
 class ParksViewModel {
   var parks = [Park]()
+  var search_state = "CA"
+  var free_park:Bool = false
   //  var filteredRepos = [Repository]()
   
   //  let client = SearchRepositoriesClient()
@@ -21,9 +23,10 @@ class ParksViewModel {
     //      if let repositories = self.parser.repositoriesFromSearchResponse(data) {
     //        self.repos = repositories
     //      }
+    parks = []
     let api_key = "xc3zAWXsavAseuzrUYem0sscY7tJpFiUpnoIr6jD"
     // set search parameters
-    let search_state = "CA"
+//    let search_state = "CA"
     let search_park = ""
 //    search_park = "Yosemite" //uncomment to search by park name too
     
@@ -40,8 +43,8 @@ class ParksViewModel {
       let swiftyjson = try JSON(data: data as! Data)
       let total = swiftyjson["total"].int!
       for i in 0..<total {
-        let entrance_fees = swiftyjson["data"][i]["entranceFees"] as JSON
-        let operating_hours = swiftyjson["data"][i]["operatingHours"][0] as JSON
+        let entrance_fees:Bool = (swiftyjson["data"][i]["entranceFees"][0]["cost"] != 0) ?? false
+//        let operating_hours = swiftyjson["data"][i]["operatingHours"][0] as JSON
         let full_name = swiftyjson["data"][i]["fullName"].string ?? ""
         let states = swiftyjson["data"][i]["states"].string ?? ""
         
@@ -56,8 +59,8 @@ class ParksViewModel {
         let description = swiftyjson["data"][i]["description"].string ?? ""
 
         
-        if (full_name != "" && parseCoords != ["0", "0"]) {
-          let park = Park.init(entrance_fees: entrance_fees, operating_hours: operating_hours, full_name: full_name, states: states, latitude: latitude, longitude: longitude, url: url, weatherInfo: weatherInfo, image: image, description: description)
+        if (full_name != "" && parseCoords != ["0", "0"] && (!free_park || !entrance_fees)) {
+          let park = Park.init(entrance_fees: entrance_fees, full_name: full_name, states: states, latitude: latitude, longitude: longitude, url: url, weatherInfo: weatherInfo, image: image, description: description)
           parks.append(park)
         }
       }
@@ -95,6 +98,14 @@ class ParksViewModel {
       return ""
     }
     return parks[indexPath.row].description
+    
+  }
+  
+  func pictureForRowAtIndexPath(_ indexPath: IndexPath) -> String {
+    guard indexPath.row >= 0 && indexPath.row < parks.count else {
+      return ""
+    }
+    return parks[indexPath.row].image
     
   }
   

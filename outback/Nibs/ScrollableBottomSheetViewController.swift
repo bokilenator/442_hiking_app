@@ -15,10 +15,14 @@ class ScrollableBottomSheetViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var nationalParkLabel: UILabel!
-    @IBOutlet weak var datesLabel: UILabel!
-    @IBOutlet weak var availabilityLabel: UILabel!
+
+  @IBOutlet weak var ratingLabel: UILabel!
   
-    let fullView: CGFloat = 100
+  @IBOutlet weak var entranceFeeLabel: UILabel!
+  @IBOutlet weak var summaryLabel: UILabel!
+  
+  
+  let fullView: CGFloat = 100
     var mapController: MapViewController!
     var partialView: CGFloat {
         return UIScreen.main.bounds.height - 150
@@ -26,7 +30,7 @@ class ScrollableBottomSheetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        trailNameLabel.font = UIFont.systemFont(ofSize: 27)
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //        tableView.register(UINib(nibName: "DefaultTableViewCell", bundle: nil), forCellReuseIdentifier: "default")
@@ -50,9 +54,15 @@ class ScrollableBottomSheetViewController: UIViewController {
             })
       trailNameLabel.text = mapController.viewModel?.title()
       distanceLabel.text = String(mapController.viewModel!.trail.length) + " mi"
-      stateLabel.text = mapController.viewModel?.trail.state
-      nationalParkLabel.text = mapController.viewModel?.trail.park?.full_name
-
+      stateLabel.text = "STATE: " + (mapController.viewModel?.trail.state)!
+      nationalParkLabel.text = "AREA: " + (mapController.viewModel?.trail.park?.full_name)!
+      let fee: Bool = mapController.viewModel!.trail.park!.entrance_fees
+      entranceFeeLabel.text = "PASS REQUIRED: " +  (fee ? "Yes" : "No")
+      ratingLabel.text = "RATINGS: " + String(repeating: "⭐", count: Int(mapController.viewModel?.trail.rating ?? 0.0))
+      summaryLabel.text = "SUMMARY: " + (mapController.viewModel?.trail.summary)!
+      
+      
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,7 +77,12 @@ class ScrollableBottomSheetViewController: UIViewController {
   }
   
   @IBAction func clearPressed(sender: UIButton) {
-    mapController.clear()
+    if Connectivity.isConnectedToInternet() {
+      print("Yes! internet is available.")
+      mapController.clear()
+    } else {
+      mapController.showAlert(message: "Cannot add/remove waypoints offline!")
+    }
   }
     
   @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {

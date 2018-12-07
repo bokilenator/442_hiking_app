@@ -1,8 +1,8 @@
 //
-//  TrailsViewController.swift
+//  NearbyViewController.swift
 //  outback
 //
-//  Created by Karan Bokil on 11/1/18.
+//  Created by Karan Bokil on 12/7/18.
 //  Copyright © 2018 Karan Bokil. All rights reserved.
 //
 
@@ -10,45 +10,50 @@ import Foundation
 import SwiftyJSON
 import UIKit
 import Kingfisher
-
-
-// MARK: - UISearch extension
-//extension RepositoriesViewController: UISearchResultsUpdating {
-//  func updateSearchResults(for searchController: UISearchController) {
-//    filterContentForSearchText(searchController.searchBar.text!)
-//  }
-//}
-
+import MapKit
+import CoreLocation
 
 // MARK: - Main View Controller
-class TrailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NearbyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
   
   // MARK: - Properties & Outlets
-  var viewModel = TrailsViewModel(park: nil)
-  let searchController = UISearchController(searchResultsController: nil)
-  let cellSpacingHeight: CGFloat = 15
+  var viewModel = NearbyViewModel()
+  let locationManager = CLLocationManager()
+  private let refreshControl = UIRefreshControl()
+
   @IBOutlet var tableView: UITableView!
   
   // MARK: - viewDidLoad, WillAppear
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if (viewModel.park == nil) {
-      self.title = "National Park"
-    } else {
-      self.title = viewModel.park?.full_name
-    }
-
+    self.title = "Nearby trails"
+    
     // register the nib
     let cellNib = UINib(nibName: "TableViewCell", bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: "cell")
+    // Ask for Authorisation from the User.
+    self.locationManager.requestAlwaysAuthorization()
     
-
-    viewModel.refresh { [unowned self] in
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-      }
+    // For use in foreground
+    self.locationManager.requestWhenInUseAuthorization()
+    
+    if CLLocationManager.locationServicesEnabled() {
+      locationManager.delegate = self
+      locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+      locationManager.startUpdatingLocation()
     }
+    
+    //pull to refresh
+    refresh()
+    if #available(iOS 10.0, *) {
+      tableView.refreshControl = refreshControl
+    } else {
+      tableView.addSubview(refreshControl)
+    }
+    
+    refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+    refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
     
     // Self-sizing magic!
     tableView.delegate = self
@@ -62,6 +67,34 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
     if let selectedRow = tableView.indexPathForSelectedRow {
       tableView.deselectRow(at: selectedRow, animated: true)
     }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+    viewModel.search_lat = String(locValue.latitude)
+    viewModel.search_long = String(locValue.longitude)
+    viewModel.refresh { [unowned self] in
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+      }
+    }
+    print("locations = \(locValue.latitude) \(locValue.longitude)")
+  }
+  
+  //refresh
+  func refresh(){
+    viewModel.refresh { [unowned self] in
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
+        //        self.activityIndicatorView.stopAnimating()
+      }
+    }
+  }
+  
+  @objc private func refresh(_ sender: Any) {
+    // Fetch Weather Data
+    refresh()
   }
   
   // MARK: - Table View
@@ -86,11 +119,6 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
     return cell
   }
   
-  // Set the spacing between sections
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return cellSpacingHeight
-  }
-  
   // Make the background color show through
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let headerView = UIView()
@@ -109,22 +137,7 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
       detailVC.viewModel = viewModel.detailViewModelForRowAtIndexPath(indexPath)
     }
   }
-  
-  
-  // MARK: - Search Methods
-//  func setupSearchBar() {
-//    searchController.searchResultsUpdater = self
-//    searchController.dimsBackgroundDuringPresentation = false
-//    definesPresentationContext = true
-//    tableView.tableHeaderView = searchController.searchBar
-//    searchController.searchBar.barTintColor = UIColor(red:0.98, green:0.48, blue:0.24, alpha:1.0)
-//  }
-//
-//  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-//    viewModel.updateFiltering(searchText)
-//    tableView.reloadData()
-//  }
-//
+
 }
 
 

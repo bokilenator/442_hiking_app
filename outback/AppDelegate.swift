@@ -17,8 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    UINavigationBar.appearance().barStyle = .blackOpaque
+    UINavigationBar.appearance().barTintColor = UIColor(red: 41/255, green: 46/255, blue: 66/255, alpha: 1)
+    UINavigationBar.appearance().backgroundColor = UIColor(red: 41/255, green: 46/255, blue: 66/255, alpha: 1)
+    UINavigationBar.appearance().tintColor = UIColor.white
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Avenir", size: 20)!]
+
+    UILabel.appearance().font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle(rawValue: "Avenir"))
+
     return true
   }
+  
 
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

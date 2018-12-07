@@ -1,8 +1,8 @@
 //
-//  TrailsViewController.swift
+//  HomeViewController.swift
 //  outback
 //
-//  Created by Karan Bokil on 11/1/18.
+//  Created by Karan Bokil on 12/7/18.
 //  Copyright © 2018 Karan Bokil. All rights reserved.
 //
 
@@ -10,45 +10,51 @@ import Foundation
 import SwiftyJSON
 import UIKit
 import Kingfisher
-
-
-// MARK: - UISearch extension
-//extension RepositoriesViewController: UISearchResultsUpdating {
-//  func updateSearchResults(for searchController: UISearchController) {
-//    filterContentForSearchText(searchController.searchBar.text!)
-//  }
-//}
-
+import CoreGraphics
 
 // MARK: - Main View Controller
-class TrailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   // MARK: - Properties & Outlets
-  var viewModel = TrailsViewModel(park: nil)
-  let searchController = UISearchController(searchResultsController: nil)
+  var viewModel = HomeViewModel()
   let cellSpacingHeight: CGFloat = 15
   @IBOutlet var tableView: UITableView!
-  
+  private let refreshControl = UIRefreshControl()
+
   // MARK: - viewDidLoad, WillAppear
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.title = "Outback"
     
-    if (viewModel.park == nil) {
-      self.title = "National Park"
-    } else {
-      self.title = viewModel.park?.full_name
-    }
-
     // register the nib
     let cellNib = UINib(nibName: "TableViewCell", bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: "cell")
     
-
-    viewModel.refresh { [unowned self] in
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-      }
+    //pull to refresh
+    refresh()
+    if #available(iOS 10.0, *) {
+      tableView.refreshControl = refreshControl
+    } else {
+      tableView.addSubview(refreshControl)
     }
+    
+    refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+    refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+
+
+    //hamburger!
+    let button =  UIButton(type: .custom)
+    button.setImage(UIImage(named: "hamburger"), for: .normal)
+    button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+    button.imageView?.contentMode = .scaleAspectFit
+//
+    button.imageEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 1, right: (-1 * self.view.frame.width + 32))//move image to the right
+//
+    let barButton = UIBarButtonItem(customView: button)
+    self.navigationItem.rightBarButtonItem = barButton
+    navigationController?.isNavigationBarHidden = false
+
     
     // Self-sizing magic!
     tableView.delegate = self
@@ -62,6 +68,26 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
     if let selectedRow = tableView.indexPathForSelectedRow {
       tableView.deselectRow(at: selectedRow, animated: true)
     }
+  }
+  
+  
+  func refresh(){
+    viewModel.refresh { [unowned self] in
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
+//        self.activityIndicatorView.stopAnimating()
+      }
+    }
+  }
+  
+  @objc private func refresh(_ sender: Any) {
+    // Fetch Weather Data
+    refresh()
+  }
+  
+  @objc func buttonAction() {
+    performSegue(withIdentifier: "toSideBar", sender: self)
   }
   
   // MARK: - Table View
@@ -81,7 +107,7 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
     cell.layer.borderWidth = 1
     cell.layer.cornerRadius = 4
     cell.clipsToBounds = true
-    
+
     
     return cell
   }
@@ -109,22 +135,5 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
       detailVC.viewModel = viewModel.detailViewModelForRowAtIndexPath(indexPath)
     }
   }
-  
-  
-  // MARK: - Search Methods
-//  func setupSearchBar() {
-//    searchController.searchResultsUpdater = self
-//    searchController.dimsBackgroundDuringPresentation = false
-//    definesPresentationContext = true
-//    tableView.tableHeaderView = searchController.searchBar
-//    searchController.searchBar.barTintColor = UIColor(red:0.98, green:0.48, blue:0.24, alpha:1.0)
-//  }
-//
-//  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-//    viewModel.updateFiltering(searchText)
-//    tableView.reloadData()
-//  }
-//
+
 }
-
-

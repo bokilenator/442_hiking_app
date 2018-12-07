@@ -7,12 +7,11 @@
     </entity>
     <entity name="ParkData" representedClassName="ParkData" syncable="YES" codeGenerationType="class">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="entrance_fees" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="entrance_fees" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="full_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="operating_hours" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="states" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weatherInfo" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,7 +30,7 @@
         <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="img" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="length" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -42,8 +41,8 @@
     </entity>
     <elements>
         <element name="Coordinate" positionX="-45" positionY="-9" width="128" height="88"/>
+        <element name="ParkData" positionX="-472.859375" positionY="171.16015625" width="128" height="193"/>
         <element name="Plan" positionX="-399.30078125" positionY="-23.1953125" width="128" height="118"/>
-        <element name="TrailData" positionX="-198" positionY="36" width="128" height="240"/>
-        <element name="ParkData" positionX="-189" positionY="144" width="128" height="210"/>
+        <element name="TrailData" positionX="-198" positionY="36" width="128" height="238"/>
     </elements>
 </model>
