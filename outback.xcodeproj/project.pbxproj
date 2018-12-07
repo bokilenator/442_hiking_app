@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F94EADB44AEA1B59A14AFD5 /* Pods_outbackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B89BB587D08987A0587652 /* Pods_outbackTests.framework */; };
+		9E000C5221BA4D930000E60A /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E000C5121BA4D930000E60A /* SideMenuTableViewController.swift */; };
 		9E03A34B21BA38990042D962 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E03A34A21BA38990042D962 /* HomeViewController.swift */; };
 		9E03A34D21BA38C30042D962 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E03A34C21BA38C30042D962 /* HomeViewModel.swift */; };
 		9E07504A219605D0003B47CC /* TrailDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */; };
@@ -58,6 +59,7 @@
 		623731199901A639388E8A40 /* Pods_outback.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_outback.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A5292AAF198E59A2568D28 /* Pods-outbackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outbackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-outbackTests/Pods-outbackTests.release.xcconfig"; sourceTree = "<group>"; };
 		7890E0ED3F98C47BA9D2A0EF /* Pods-outback.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-outback.release.xcconfig"; path = "Pods/Target Support Files/Pods-outback/Pods-outback.release.xcconfig"; sourceTree = "<group>"; };
+		9E000C5121BA4D930000E60A /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		9E03A34A21BA38990042D962 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9E03A34C21BA38C30042D962 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		9E075049219605D0003B47CC /* TrailDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailDetailsViewModelTests.swift; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9E000C5021BA4D790000E60A /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				9E000C5121BA4D930000E60A /* SideMenuTableViewController.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
 		9E03A34921BA38660042D962 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +180,7 @@
 		9E645007218789A200302455 /* outback */ = {
 			isa = PBXGroup;
 			children = (
+				9E000C5021BA4D790000E60A /* Sidebar */,
 				9E03A34921BA38660042D962 /* Home */,
 				9EF9AA1D21B9BBDE00BECF3B /* Filter */,
 				9E8E179021B0E8180013DE34 /* Nibs */,
@@ -395,6 +406,7 @@
 				"${PODS_ROOT}/MapboxNavigationNative/MapboxNavigationNative.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/MapboxSpeech/MapboxSpeech.framework",
 				"${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Solar/Solar.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Turf/Turf.framework",
@@ -416,6 +428,7 @@
 				"${DWARF_DSYM_FOLDER_PATH}/MapboxNavigationNative.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxSpeech.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Polyline.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Solar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Turf.framework",
@@ -497,6 +510,7 @@
 				9EF0E5C821959D6D0021A47B /* MapViewModel.swift in Sources */,
 				9EF6E25B218B959700482BE9 /* Park.swift in Sources */,
 				9EF6E249218B3CDB00482BE9 /* TrailsViewController.swift in Sources */,
+				9E000C5221BA4D930000E60A /* SideMenuTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

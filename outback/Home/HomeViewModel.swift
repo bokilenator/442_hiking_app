@@ -19,6 +19,7 @@ class HomeViewModel {
   var trails = [Trail]()
 
   func refresh(_ completion: @escaping () -> Void) {
+    trails = []
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let context = appDelegate.persistentContainer.viewContext
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Plan")
@@ -58,7 +59,7 @@ class HomeViewModel {
     guard indexPath.row >= 0 && indexPath.row < trails.count else {
       return ""
     }
-    return trails[indexPath.row].summary
+    return "\(trails[indexPath.row].length) mi" + String(repeating: " ", count: (3 - String(trails[indexPath.row].length).count)) + "\t \t \t" + String(repeating: "⭐", count: Int(trails[indexPath.row].rating))
     
   }
   

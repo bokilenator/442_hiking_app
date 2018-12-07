@@ -8,6 +8,7 @@ target 'outback' do
   # Pods for outback
   pod 'SwiftyJSON'
   pod 'Alamofire'
+  pod 'SideMenu'
   pod 'Kingfisher', '~> 4.0'
   pod 'Eureka'
   pod 'Mapbox-iOS-SDK', '~> 4.4'

@@ -53,8 +53,8 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
     // Self-sizing magic!
     tableView.delegate = self
     
-    self.tableView.rowHeight = 175
-    self.tableView.estimatedRowHeight = 175; //Set this to any value that works for you.
+    self.tableView.rowHeight = 190
+    self.tableView.estimatedRowHeight = 190; //Set this to any value that works for you.
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -77,9 +77,9 @@ class TrailsViewController: UIViewController, UITableViewDataSource, UITableView
     cell.picPreview.kf.setImage(with: URL(string: viewModel.pictureForRowAtIndexPath(indexPath)))
     // add border and color
     cell.backgroundColor = UIColor.white
-    cell.layer.borderColor = UIColor.black.cgColor
+    cell.layer.borderColor = UIColor.lightGray.cgColor
     cell.layer.borderWidth = 1
-    cell.layer.cornerRadius = 8
+    cell.layer.cornerRadius = 4
     cell.clipsToBounds = true
     
     

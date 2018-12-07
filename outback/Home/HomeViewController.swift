@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 import UIKit
 import Kingfisher
+import CoreGraphics
 
 // MARK: - Main View Controller
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -18,7 +19,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
   var viewModel = HomeViewModel()
   let cellSpacingHeight: CGFloat = 15
   @IBOutlet var tableView: UITableView!
-  
+  private let refreshControl = UIRefreshControl()
+
   // MARK: - viewDidLoad, WillAppear
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,17 +31,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     tableView.register(cellNib, forCellReuseIdentifier: "cell")
     
     
-    viewModel.refresh { [unowned self] in
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-      }
+    refresh()
+    if #available(iOS 10.0, *) {
+      tableView.refreshControl = refreshControl
+    } else {
+      tableView.addSubview(refreshControl)
     }
+    
+    refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+    refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+
+
     
     // Self-sizing magic!
     tableView.delegate = self
     
-    self.tableView.rowHeight = 175
-    self.tableView.estimatedRowHeight = 175; //Set this to any value that works for you.
+    self.tableView.rowHeight = 190
+    self.tableView.estimatedRowHeight = 190; //Set this to any value that works for you.
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +55,22 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     if let selectedRow = tableView.indexPathForSelectedRow {
       tableView.deselectRow(at: selectedRow, animated: true)
     }
+  }
+  
+  
+  func refresh(){
+    viewModel.refresh { [unowned self] in
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
+//        self.activityIndicatorView.stopAnimating()
+      }
+    }
+  }
+  
+  @objc private func refresh(_ sender: Any) {
+    // Fetch Weather Data
+    refresh()
   }
   
   // MARK: - Table View
@@ -62,11 +86,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     cell.picPreview.kf.setImage(with: URL(string: viewModel.pictureForRowAtIndexPath(indexPath)))
     // add border and color
     cell.backgroundColor = UIColor.white
-    cell.layer.borderColor = UIColor.black.cgColor
+    cell.layer.borderColor = UIColor.lightGray.cgColor
     cell.layer.borderWidth = 1
-    cell.layer.cornerRadius = 8
+    cell.layer.cornerRadius = 4
     cell.clipsToBounds = true
-    
+
     
     return cell
   }
