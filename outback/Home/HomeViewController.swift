@@ -19,6 +19,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
   var viewModel = HomeViewModel()
   let cellSpacingHeight: CGFloat = 15
   @IBOutlet var tableView: UITableView!
+  
   private let refreshControl = UIRefreshControl()
 
   // MARK: - viewDidLoad, WillAppear
